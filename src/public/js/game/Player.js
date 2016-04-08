@@ -23,7 +23,7 @@ define(["require", "exports", 'game/GameObject'], function (require, exports, Ga
             enumerable: true,
             configurable: true
         });
-        Player.prototype.accelerate = function () {
+        Player.prototype.accelerate = function (accelerate) {
             if (this.acceleration < this.maxAcceleration) {
                 this.acceleration += 1;
             }

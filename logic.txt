@@ -1,0 +1,44 @@
+initial constraints:
+
+	- position should not be outside of boundaries
+
+actions:
+
+	- accelerate
+	- rotate 5 degrees
+	- decelerate --> cannot be negative speed
+	
+machine goal:
+
+	- achieve learning points
+
+	
+self-goal:
+
+	-10 points
+	
+goal:
+
+	+10 points
+	
+kicking the ball:
+
+	+2 points
+
+crashing to the other player:
+
+	-2 points
+	
+getting closer to the ball
+
+	+2 points
+	
+getting far from the ball
+
+	-2 points
+
+kicking the ball outside the boundaries
+
+    -10 points
+
+the ball getting closer t

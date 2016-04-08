@@ -17,7 +17,7 @@ class Player extends GameObject {
         this._color = color;
     }
 
-    public accelerate() {
+    public accelerate(accelerate) {
         if (this.acceleration < this.maxAcceleration) {
             this.acceleration += 1;
         }
