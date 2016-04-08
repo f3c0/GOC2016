@@ -5,6 +5,7 @@ class Player extends GameObject
 {
     private maxAcceleration = 2;
     private minAcceleration = 0;
+    private rotationDegree  = Math.PI / 36;
 
     constructor(public coordinate:Coordinate, public direction:number, public name:string)
     {
@@ -27,12 +28,12 @@ class Player extends GameObject
 
     public rotateLeft()
     {
-        this.direction -= 0.0872665;
+        this.direction -= this.rotationDegree;
     }
 
     public rotateRight()
     {
-        this.direction += 0.0872665;
+        this.direction += this.rotationDegree;
     }
 }
 
