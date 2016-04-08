@@ -1,3 +1,5 @@
+import Coordinate = require('Coordinate');
+
 class GameObject
 {
     private maxSpeed = 5;
