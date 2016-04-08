@@ -1,9 +1,10 @@
 class Game {
+    roundLength:number = 100;
     field:Field;
     players:Player[];
     ball:Ball;
 
-    roundNumber: number = 1000;
+    roundNumber:number = 100;
 
     constructor() {
         this.field = new Field(200, 100);
@@ -15,14 +16,17 @@ class Game {
     }
 
     public start() {
-        for(var round=0; round<this.roundNumber; round++) {
-            this.playRound(round);
-        }
+        this.playRound(0);
     }
 
     private playRound(round:number):void {
+        console.info('play round #' + round);
         this.players[0].move();
         this.players[1].move();
         this.ball.move();
+
+        if (round < this.roundNumber) {
+            setTimeout(() => this.playRound(round + 1), this.roundLength);
+        }
     }
 }

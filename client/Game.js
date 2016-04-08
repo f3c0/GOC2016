@@ -1,6 +1,7 @@
 var Game = (function () {
     function Game() {
-        this.roundNumber = 1000;
+        this.roundLength = 100;
+        this.roundNumber = 100;
         this.field = new Field(200, 100);
         this.players = [
             new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob'),
@@ -9,14 +10,17 @@ var Game = (function () {
         this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 0);
     }
     Game.prototype.start = function () {
-        for (var round = 0; round < this.roundNumber; round++) {
-            this.playRound(round);
-        }
+        this.playRound(0);
     };
     Game.prototype.playRound = function (round) {
+        var _this = this;
+        console.info('play round #' + round);
         this.players[0].move();
         this.players[1].move();
         this.ball.move();
+        if (round < this.roundNumber) {
+            setTimeout(function () { return _this.playRound(round + 1); }, this.roundLength);
+        }
     };
     return Game;
 })();
