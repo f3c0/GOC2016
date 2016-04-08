@@ -11,7 +11,25 @@ define(["require", "exports"], function (require, exports) {
             this.coordinate = coordinate;
             this.direction = direction;
             this.name = name;
+            this.maxAcceleration = 2;
+            this.minAcceleration = 0;
         }
+        Player.prototype.accelerate = function () {
+            if (this.acceleration < this.maxAcceleration) {
+                this.acceleration += 1;
+            }
+        };
+        Player.prototype.decelerate = function () {
+            if (this.acceleration > this.minAcceleration) {
+                this.acceleration -= 1;
+            }
+        };
+        Player.prototype.rotateLeft = function () {
+            this.direction -= 0.0872665;
+        };
+        Player.prototype.rotateRight = function () {
+            this.direction += 0.0872665;
+        };
         return Player;
     })(GameObject);
     return Player;
