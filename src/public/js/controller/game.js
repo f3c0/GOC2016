@@ -1,3 +1,3 @@
 define(['jquery'], function($) {
-	console.log('Betölt');
+	console.log('Game module loaded.');
 });
