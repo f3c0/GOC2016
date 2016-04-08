@@ -1,6 +1,8 @@
 (function init() {
     console.info('play');
 
-    var game = new Game();
+    var canvas = document.getElementById('canvas');
+
+    var game = new Game(canvas);
     game.start();
 })();
