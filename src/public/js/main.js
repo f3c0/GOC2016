@@ -4,7 +4,7 @@ requirejs.config({
         'jquery': 'lib/jquery',
         'page': 'lib/router',
 		  'gameController': 'controller/game',
-		  'indexController': 'controller/index'
+		  'indexController': 'controller/index',
 		  'offlineController': 'controller/offline'
     }
 });
@@ -24,7 +24,7 @@ require(['jquery', 'page'], function($, page) {
 	});
 
 	page('/offline', function(context){
-		//Gane
+		//Game
 	  require(['offlineController']);
 	});
 

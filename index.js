@@ -4,6 +4,14 @@ var app = express();
 app.use('/static', express.static('src/public/'));
 
 
+app.get('/', function(req, resp) {
+	resp.sendFile(__dirname + '/src/view/index.html');
+});
+
+app.get('/offline', function(req, resp) {
+	resp.sendFile(__dirname + '/src/view/game.html');
+});
+
 app.get('*', function(req, resp) {
 	resp.sendFile(__dirname + '/src/view/index.html');
 });
