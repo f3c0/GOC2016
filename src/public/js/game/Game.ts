@@ -41,3 +41,5 @@ class Game {
 
     }
 }
+
+export = Game;

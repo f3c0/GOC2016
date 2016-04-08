@@ -3,3 +3,5 @@ class Field {
 
     }
 }
+
+export = Field;

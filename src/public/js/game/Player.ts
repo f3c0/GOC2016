@@ -3,3 +3,5 @@ class Player extends GameObject {
         super(coordinate, direction);
     }
 }
+
+export = Player;
