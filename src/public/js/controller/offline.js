@@ -1,4 +1,4 @@
-define(['jquery', 'game/Coordinate'], function($, GameObject, Coordinate) {
+define(['jquery', 'game/Coordinate'], function($, Coordinate) {
 	console.log(Coordinate);
 	console.log('Offline module loaded.');
 });
