@@ -1,3 +1,8 @@
+import Field = require('Field');
+import Player = require('Player');
+import Ball = require('Ball');
+import Coordinate = require('Coordinate');
+
 class Game {
     private roundLength:number = 100;
     private field:Field;

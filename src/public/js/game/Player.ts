@@ -1,3 +1,6 @@
+import GameObject = require('GameObject');
+import Coordinate = require('Coordinate');
+
 class Player extends GameObject
 {
     private maxAcceleration = 2;

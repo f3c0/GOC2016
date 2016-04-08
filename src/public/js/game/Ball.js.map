@@ -1,1 +1,1 @@
-{"version":3,"file":"Ball.js","sourceRoot":"","sources":["Ball.ts"],"names":["Ball","Ball.constructor"],"mappings":";;;;;;IAAA;QAAmBA,wBAAUA;QAA7BA;YAAmBC,8BAAUA;QAC7BA,CAACA;QAADD,WAACA;IAADA,CAACA,AADD,EAAmB,UAAU,EAC5B;IAED,OAAS,IAAI,CAAC"}
+{"version":3,"file":"Ball.js","sourceRoot":"","sources":["Ball.ts"],"names":["Ball","Ball.constructor"],"mappings":";;;;;;IAEA;QAAmBA,wBAAUA;QAA7BA;YAAmBC,8BAAUA;QAC7BA,CAACA;QAADD,WAACA;IAADA,CAACA,AADD,EAAmB,UAAU,EAC5B;IAED,OAAS,IAAI,CAAC"}

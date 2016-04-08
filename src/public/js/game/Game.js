@@ -1,4 +1,4 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", 'Field', 'Player', 'Ball', 'Coordinate'], function (require, exports, Field, Player, Ball, Coordinate) {
     var Game = (function () {
         function Game(canvas) {
             this.canvas = canvas;
