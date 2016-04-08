@@ -4,12 +4,18 @@ import Actuator = require('game/Actuator');
 import Ball = require('game/Ball');
 import Coordinate = require('game/Coordinate');
 
+import FieldView = require('game/View/FieldView');
+//import PlayerView = require('game/View/PlayerView');
+//import BallView = require('game/View/BallView');
+
 class Game {
     private roundLength:number = 100;
     private field:Field;
     private players:Player[];
     private actuators:Actuator[];
     private ball:Ball;
+
+    private fieldView:FieldView;
 
     private roundNumber:number = 100;
     private ctx;
@@ -31,6 +37,8 @@ class Game {
         this.canvas.width = this.field.width;
         this.canvas.height = this.field.height;
         this.ctx = this.canvas.getContext('2d');
+
+        this.fieldView = new FieldView(this.ctx);
     }
 
     public start() {
@@ -54,7 +62,7 @@ class Game {
     }
 
     private draw() {
-
+        this.fieldView.draw(this.field);
     }
 }
 

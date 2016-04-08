@@ -13,6 +13,7 @@ define(["require", "exports", 'game/GameObject'], function (require, exports, Ga
             this.name = name;
             this.maxAcceleration = 2;
             this.minAcceleration = 0;
+            this.rotationDegree = Math.PI / 36;
         }
         Player.prototype.accelerate = function () {
             if (this.acceleration < this.maxAcceleration) {
@@ -25,10 +26,10 @@ define(["require", "exports", 'game/GameObject'], function (require, exports, Ga
             }
         };
         Player.prototype.rotateLeft = function () {
-            this.direction -= 0.0872665;
+            this.direction -= this.rotationDegree;
         };
         Player.prototype.rotateRight = function () {
-            this.direction += 0.0872665;
+            this.direction += this.rotationDegree;
         };
         return Player;
     })(GameObject);
