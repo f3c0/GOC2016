@@ -1,4 +1,4 @@
-define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'game/Ball', 'game/Coordinate', 'game/View/FieldView'], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView) {
+define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'game/Ball', 'game/Coordinate', 'game/View/FieldView', "./View/Color", "./View/PlayerView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView) {
     //import PlayerView = require('game/View/PlayerView');
     //import BallView = require('game/View/BallView');
     var Game = (function () {
@@ -8,8 +8,8 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
             this.roundNumber = 100;
             this.field = new Field(200, 100);
             this.players = [
-                new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob'),
-                new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek')
+                new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob', Color.Player1),
+                new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
             ];
             // At first always the second player is controlled by AI.
             this.actuators = [
@@ -20,6 +20,7 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
             this.canvas.height = this.field.height;
             this.ctx = this.canvas.getContext('2d');
             this.fieldView = new FieldView(this.ctx);
+            this.playerView = new PlayerView(this.ctx);
         }
         Game.prototype.start = function () {
             this.playRound(0);
@@ -39,6 +40,9 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
         };
         Game.prototype.draw = function () {
             this.fieldView.draw(this.field);
+            this.players.forEach(function (player) {
+                this.playerView.draw(player);
+            }, this);
         };
         return Game;
     })();

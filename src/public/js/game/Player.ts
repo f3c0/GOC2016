@@ -1,38 +1,39 @@
 import GameObject = require('game/GameObject');
 import Coordinate = require('game/Coordinate');
+import Color = require("./View/Color");
 
-class Player extends GameObject
-{
+class Player extends GameObject {
     private maxAcceleration = 2;
     private minAcceleration = 0;
-    private rotationDegree  = Math.PI / 36;
+    private rotationDegree = Math.PI / 36;
+    private _color:Color;
 
-    constructor(public coordinate:Coordinate, public direction:number, public name:string)
-    {
+    get color():Color {
+        return this._color;
+    }
+
+    constructor(public coordinate:Coordinate, public direction:number, public name:string, color:Color) {
         super(coordinate, direction);
+        this._color = color;
     }
 
     public accelerate() {
-        if (this.acceleration < this.maxAcceleration)
-        {
+        if (this.acceleration < this.maxAcceleration) {
             this.acceleration += 1;
         }
     }
 
     public decelerate() {
-        if (this.acceleration > this.minAcceleration)
-        {
+        if (this.acceleration > this.minAcceleration) {
             this.acceleration -= 1;
         }
     }
 
-    public rotateLeft()
-    {
+    public rotateLeft() {
         this.direction -= this.rotationDegree;
     }
 
-    public rotateRight()
-    {
+    public rotateRight() {
         this.direction += this.rotationDegree;
     }
 }

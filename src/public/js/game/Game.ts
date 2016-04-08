@@ -5,6 +5,8 @@ import Ball = require('game/Ball');
 import Coordinate = require('game/Coordinate');
 
 import FieldView = require('game/View/FieldView');
+import Color = require("./View/Color");
+import PlayerView = require("./View/PlayerView");
 //import PlayerView = require('game/View/PlayerView');
 //import BallView = require('game/View/BallView');
 
@@ -16,6 +18,7 @@ class Game {
     private ball:Ball;
 
     private fieldView:FieldView;
+    private playerView:PlayerView;
 
     private roundNumber:number = 100;
     private ctx;
@@ -23,8 +26,8 @@ class Game {
     constructor(public canvas:HTMLCanvasElement) {
         this.field = new Field(200, 100);
         this.players = [
-            new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob'),
-            new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek')
+            new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob', Color.Player1),
+            new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
         ];
 
         // At first always the second player is controlled by AI.
@@ -39,6 +42,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d');
 
         this.fieldView = new FieldView(this.ctx);
+        this.playerView = new PlayerView(this.ctx);
     }
 
     public start() {
@@ -63,6 +67,9 @@ class Game {
 
     private draw() {
         this.fieldView.draw(this.field);
+        this.players.forEach(function (player) {
+            this.playerView.draw(player);
+        }, this);
     }
 }
 

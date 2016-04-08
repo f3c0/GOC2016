@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 define(["require", "exports", 'game/GameObject'], function (require, exports, GameObject) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        function Player(coordinate, direction, name) {
+        function Player(coordinate, direction, name, color) {
             _super.call(this, coordinate, direction);
             this.coordinate = coordinate;
             this.direction = direction;
@@ -14,7 +14,15 @@ define(["require", "exports", 'game/GameObject'], function (require, exports, Ga
             this.maxAcceleration = 2;
             this.minAcceleration = 0;
             this.rotationDegree = Math.PI / 36;
+            this._color = color;
         }
+        Object.defineProperty(Player.prototype, "color", {
+            get: function () {
+                return this._color;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Player.prototype.accelerate = function () {
             if (this.acceleration < this.maxAcceleration) {
                 this.acceleration += 1;
