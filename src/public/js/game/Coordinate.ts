@@ -3,3 +3,5 @@ class Coordinate {
 
     }
 }
+
+export = Coordinate;

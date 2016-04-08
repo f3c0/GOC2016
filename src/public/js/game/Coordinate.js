@@ -5,4 +5,5 @@ var Coordinate = (function () {
     }
     return Coordinate;
 })();
+module.exports = Coordinate;
 //# sourceMappingURL=Coordinate.js.map
