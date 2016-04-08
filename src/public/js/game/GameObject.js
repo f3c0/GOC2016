@@ -12,4 +12,5 @@ var GameObject = (function () {
     };
     return GameObject;
 })();
+module.exports = GameObject;
 //# sourceMappingURL=GameObject.js.map

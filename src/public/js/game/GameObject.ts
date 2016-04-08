@@ -11,3 +11,5 @@ class GameObject {
         this.speed += this.acceleration;
     }
 }
+
+export = GameObject;
