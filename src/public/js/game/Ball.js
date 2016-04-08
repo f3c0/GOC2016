@@ -10,4 +10,5 @@ var Ball = (function (_super) {
     }
     return Ball;
 })(GameObject);
+module.exports = Ball;
 //# sourceMappingURL=Ball.js.map
