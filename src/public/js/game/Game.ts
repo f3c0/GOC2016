@@ -61,11 +61,11 @@ class Game {
                     )
                 );
 
-                if (team != 0 || i != 0) {
-                    this.actuators.push(
-                        new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam])
-                    );
-                }
+                //if (team != 0 || i != 0) {
+                //    this.actuators.push(
+                //        new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam])
+                //    );
+                //}
             }
         }
 
@@ -82,6 +82,12 @@ class Game {
         this.fieldView = new FieldView(this.ctx);
         this.playerView = new PlayerView(this.ctx);
         this.ballView = new BallView(this.ctx);
+    }
+
+    public addAccurator(playerIndex) {
+        this.actuators.push(
+            new Actuator(this.players[playerIndex])
+        );
     }
 
     public getPlayer(index:number) {

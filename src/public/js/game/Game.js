@@ -21,9 +21,6 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
                     var xCoordinate = Math.random() * (xMax - 50 - xMin - 50) + xMin + 50;
                     var yCoordinate = Math.random() * (this.field.height - 50 - 50) + 50;
                     this.players.push(new Player(new Coordinate(xCoordinate, yCoordinate), Math.random() * Math.PI * 2, this.field, 'Bob' + (i + team * Config.numberOfPlayersPerTeam), Color.playerColors[team]));
-                    if (team != 0 || i != 0) {
-                        this.actuators.push(new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam]));
-                    }
                 }
             }
             this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
@@ -37,6 +34,9 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.playerView = new PlayerView(this.ctx);
             this.ballView = new BallView(this.ctx);
         }
+        Game.prototype.addAccurator = function (playerIndex) {
+            this.actuators.push(new Actuator(this.players[playerIndex]));
+        };
         Game.prototype.getPlayer = function (index) {
             return this.players[index];
         };
