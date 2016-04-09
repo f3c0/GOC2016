@@ -8,7 +8,7 @@ class Player extends GameObject {
     private minAcceleration = -1;
     private rotationDegree = Math.PI / 6;
     private _color:Color;
-    private _r = 15;
+    private _r = 10;
     private _score:number = 0;
 
     get color():Color {
@@ -87,6 +87,7 @@ class Player extends GameObject {
 
             this.speed         = 1;
             this.acceleration  = 0;
+            this.direction += Math.PI;
         }
 
         if (this.field.isWithinYBoundary(newYEdge))
@@ -103,6 +104,7 @@ class Player extends GameObject {
 
             this.speed         = 1;
             this.acceleration  = 0;
+            this.direction += Math.PI;
         }
 
         this.calculateActualSpeed();

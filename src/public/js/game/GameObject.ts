@@ -2,7 +2,7 @@ import Coordinate = require('./Coordinate');
 import Field      = require('./Field');
 
 class GameObject {
-    private maxSpeed = 5;
+    private _maxSpeed = 5;
     private minSpeed = 0;
 
     public speed:number = 0;
@@ -21,12 +21,16 @@ class GameObject {
 
     protected calculateActualSpeed() {
         this.speed += this.acceleration;
-        if (this.speed > this.maxSpeed) {
-            this.speed = this.maxSpeed;
+        if (this.speed > this._maxSpeed) {
+            this.speed = this._maxSpeed;
         }
         else if (this.speed < this.minSpeed) {
             this.speed = this.minSpeed;
         }
+    }
+
+    get maxSpeed():number {
+        return this._maxSpeed;
     }
 }
 

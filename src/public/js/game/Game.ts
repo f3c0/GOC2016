@@ -22,7 +22,7 @@ import Evaluator        = require("./Evaluator");
 
 class Game {
     private roundLength:number = 25;
-    private roundNumber:number = 75;
+    private roundNumber:number = 10000;
 
     private config:Config;
     private field:Field;
@@ -39,14 +39,15 @@ class Game {
     private ctx;
 
     // Data for AI
-    private stateRepository:StateRepository;
+    private stateRepositories:StateRepository[];
     private evaluator:Evaluator;
 
     constructor(public canvas:HTMLCanvasElement) {
-        this.config     = new Config();
-        this.field      = new Field(this.canvas.width, this.canvas.height);
-        this.players    = [];
-        this.actuators  = [];
+        this.config             = new Config();
+        this.field              = new Field(this.canvas.width, this.canvas.height);
+        this.players            = [];
+        this.actuators          = [];
+        this.stateRepositories  = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
@@ -74,6 +75,10 @@ class Game {
                 if (team != 0 || i != 0) {
                     this.actuators.push(
                         new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam])
+                    );
+
+                    this.stateRepositories.push(
+                        new StateRepository()
                     );
                 }
             }
@@ -121,7 +126,6 @@ class Game {
 
     public start() {
         this.evaluator = new Evaluator();
-        this.stateRepository = new StateRepository();
         this.inputProcessors[0].activatePlayerInterface();
         this.playRound(1);
     }
@@ -130,8 +134,8 @@ class Game {
         //console.info('play round #' + round);
 
         this.actuators.forEach(
-            function (actor) {
-                actor.decide(this.stateRepository);
+            function (actor, index) {
+                actor.decide(this.stateRepositories[index]);
             },
             this
         );
@@ -145,9 +149,14 @@ class Game {
         this.handleCollisions();
 
         // Store game state data for later use by AI
-        this.stateRepository.storeState(this.getGameState());
-        // Evaluate game states
-        this.evaluator.evaluate(this.stateRepository);
+        this.stateRepositories.forEach(
+            function (stateRepository, index) {
+                stateRepository.storeState(this.getGameState(index));
+                // Evaluate game states
+                this.evaluator.evaluate(stateRepository);
+            },
+            this
+        );
 
         this.draw();
 
@@ -191,7 +200,13 @@ class Game {
                 this.ball.direction = directionPlayerToBall;
                 this.ball.speed += player.speed * 2;
                 player.acceleration = 0;
-                this.stateRepository.clearStates();
+
+                this.stateRepositories.forEach(
+                    function (stateRepository, index) {
+                        stateRepository.clearStates();
+                    },
+                    this
+                );
             }
         }, this);
     };
@@ -220,14 +235,14 @@ class Game {
         }
     };
 
-    private getGameState()
+    private getGameState(index)
     {
         var gameState = new GameState();
 
         gameState.gateWidth      = this.field.gateWidth;
         gameState.ballPosition   = this.ball.coordinate;
-        gameState.playerPosition = this.players[1].coordinate;
-        gameState.decision       = this.actuators[0].decision;
+        gameState.playerPosition = this.players[index + 1].coordinate;
+        gameState.decision       = this.actuators[index].decision;
 
         return gameState;
     }
