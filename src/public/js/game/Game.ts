@@ -32,7 +32,7 @@ class Game {
 
     private ctx;
 
-    constructor(public canvas:HTMLCanvasElement, public onAfterStep = null) {
+    constructor(public canvas:HTMLCanvasElement, public onAfterStep = null, public master:boolean = true) {
         this.config = new Config();
         this.field = new Field(this.canvas.width, this.canvas.height);
         this.players = [];
@@ -132,14 +132,17 @@ class Game {
         });
         this.players.forEach(function (player, index) {
             player.move();
-            if (this.onAfterStep) {
-                this.onAfterStep(player, index);
-            }
         }, this);
 
-        this.ball.move();
+        if (this.master) {
+            this.moveBall();
+        }
 
         this.handleCollisions();
+
+        if (this.onAfterStep) {
+            this.onAfterStep(this.players, this.ball);
+        }
 
         this.draw();
 
@@ -147,6 +150,10 @@ class Game {
             setTimeout(() => this.playRound(round + 1), this.roundLength);
         }
     }
+
+    public moveBall() {
+        this.ball.move();
+    };
 
     private draw() {
         this.fieldView.draw(this.field, this.gates);
