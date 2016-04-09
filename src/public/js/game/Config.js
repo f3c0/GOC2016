@@ -2,7 +2,7 @@ define(["require", "exports"], function (require, exports) {
     var Config = (function () {
         function Config() {
         }
-        Config.numberOfPlayersPerTeam = 4;
+        Config.numberOfPlayersPerTeam = 1;
         return Config;
     })();
     return Config;

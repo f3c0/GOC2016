@@ -48,7 +48,14 @@ io.on('connection', function(socket) {
 							if(room.users.length == 1) {
 							    roomHandler.addUser(data.room, socket);
 							    message.result = true;
-							    message.start = true;
+								 var users = roomHandler.getUsersInRoom(data.room);
+								 users.forEach(function(userSocket, key) {
+									 userSocket.emit('message', {
+										 'type': 'start',
+										 'result': true,
+										 'key': key
+									 });
+								 });
 							}
 			    		}
 						else {
@@ -65,7 +72,7 @@ io.on('connection', function(socket) {
 					    var message = {
 							'type': 'data',
 							'result': false,
-							'id': socket.id,
+							'data': {},
 					    };
 
 			    		if(typeof data.data !== 'undefined' && typeof data.room != 'undefined' && roomHandler.isRoom(data.room)) {

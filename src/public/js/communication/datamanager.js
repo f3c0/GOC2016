@@ -24,11 +24,8 @@ define(['communication/socket'], function(SocketHandler) {
 
 	dataManager.prototype.resolveMSG = function(msg) {
 		switch(msg.type){
-			case 'connect':
-				if(msg.start == true) {
-					this.master = true;
-					this.onPartnerJoin();
-				}
+			case 'start':
+				this.startGame(msg.key);
 			break;
 			case 'data':
 				this.onData(msg.data);
@@ -36,7 +33,7 @@ define(['communication/socket'], function(SocketHandler) {
 		}
 	}
 
-	dataManager.prototype.onPartnerJoin = function() {
+	dataManager.prototype.startGame = function() {
 
 	}
 
