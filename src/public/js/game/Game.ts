@@ -33,9 +33,10 @@ class Game {
     private ctx;
 
     constructor(public canvas:HTMLCanvasElement) {
-        this.config = new Config();
-        this.field  = new Field(this.canvas.width, this.canvas.height);
-        this.players = [];
+        this.config     = new Config();
+        this.field      = new Field(this.canvas.width, this.canvas.height);
+        this.players    = [];
+        this.actuators  = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
@@ -55,10 +56,16 @@ class Game {
                         new Coordinate(xCoordinate, yCoordinate),
                         Math.random() * Math.PI * 2,
                         this.field,
-                        'Bob',
+                        'Bob' + (i + team * Config.numberOfPlayersPerTeam),
                         Color.playerColors[team]
                     )
                 );
+
+                if (team != 0 || i != 0) {
+                    this.actuators.push(
+                        new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam])
+                    );
+                }
             }
         }
 
@@ -68,17 +75,6 @@ class Game {
         // At first always the second player is controlled by AI.
         this.inputProcessors = [
             new InputProcessor(this.players[0])
-        ];
-
-        this.actuators = [
-            new Actuator(this.players[1]),
-            new Actuator(this.players[2]),
-            new Actuator(this.players[3]),
-            new Actuator(this.players[4]),
-            new Actuator(this.players[5]),
-            new Actuator(this.players[6]),
-            new Actuator(this.players[7]),
-
         ];
 
         this.ctx = this.canvas.getContext('2d');
@@ -93,17 +89,21 @@ class Game {
         this.ball.coordinate.y = this.field.height / 2;
         this.ball.speed = 0;
 
-        this.players[0].coordinate.x = this.field.width / 4;
-        this.players[0].coordinate.y = this.field.height / 2;
-        this.players[0].speed = 0;
-        this.players[0].acceleration = 0;
-        this.players[0].direction = 0;
+        for (var team = 0; team < 2; team++) {
+            for (var i = 0; i < Config.numberOfPlayersPerTeam; i++) {
+                var xMin = team * this.field.width / 2;
+                var xMax = this.field.width / 2 + xMin;
 
-        this.players[1].coordinate.x = 3 * this.field.width / 4;
-        this.players[1].coordinate.y = this.field.height / 2;
-        this.players[1].speed = 0;
-        this.players[1].acceleration = 0;
-        this.players[1].direction = Math.PI;
+                var xCoordinate = Math.random() * (xMax - 50 - xMin - 50) + xMin + 50;
+                var yCoordinate = Math.random() * (this.field.height - 50 - 50) + 50;
+
+                this.players[i + team * Config.numberOfPlayersPerTeam].coordinate.x = xCoordinate;
+                this.players[i + team * Config.numberOfPlayersPerTeam].coordinate.y = yCoordinate;
+                this.players[i + team * Config.numberOfPlayersPerTeam].speed = 0;
+                this.players[i + team * Config.numberOfPlayersPerTeam].acceleration = 0;
+                this.players[i + team * Config.numberOfPlayersPerTeam].direction = Math.random() * Math.PI * 2;
+            }
+        }
 
         $('#score1').text(this.players[0].score);
         $('#score2').text(this.players[1].score);
