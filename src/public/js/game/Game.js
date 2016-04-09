@@ -1,4 +1,4 @@
-define(["require", "exports", './Field', './Player', './Actuator', './Ball', './Coordinate', './View/FieldView', "game/View/Color", "./View/PlayerView", "./View/BallView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView, BallView) {
+define(["require", "exports", './Field', './Player', './Actuator', './InputProcessor', './Ball', './Coordinate', './View/FieldView', "game/View/Color", "./View/PlayerView", "./View/BallView"], function (require, exports, Field, Player, Actuator, InputProcessor, Ball, Coordinate, FieldView, Color, PlayerView, BallView) {
     var Game = (function () {
         function Game(canvas) {
             this.canvas = canvas;
@@ -10,6 +10,9 @@ define(["require", "exports", './Field', './Player', './Actuator', './Ball', './
                 new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
             ];
             // At first always the second player is controlled by AI.
+            this.inputProcessors = [
+                new InputProcessor(this.players[0])
+            ];
             this.actuators = [
                 new Actuator(this.players[1])
             ];
@@ -22,17 +25,18 @@ define(["require", "exports", './Field', './Player', './Actuator', './Ball', './
             this.ballView = new BallView(this.ctx);
         }
         Game.prototype.start = function () {
+            this.inputProcessors[0].activatePlayerInterface();
             this.playRound(1);
         };
         Game.prototype.playRound = function (round) {
+            //console.info('play round #' + round);
             var _this = this;
-            console.info('play round #' + round);
             this.players[0].move();
             // At first always the second player is controlled by AI.
             this.actuators[0].decide();
             this.players[1].move();
             this.ball.move();
-            console.log('Chosen decision: ');
+            /*console.log('Chosen decision: ');
             console.log(this.actuators[0].decision);
             console.log('Player 1 position: ');
             console.log(this.players[0].coordinate);
@@ -45,7 +49,7 @@ define(["require", "exports", './Field', './Player', './Actuator', './Ball', './
             console.log('Ball position: ');
             console.log(this.ball.coordinate);
             console.log('Ball speed: ');
-            console.log(this.ball.speed);
+            console.log(this.ball.speed);*/
             this.draw();
             if (round < this.roundNumber) {
                 setTimeout(function () { return _this.playRound(round + 1); }, this.roundLength);

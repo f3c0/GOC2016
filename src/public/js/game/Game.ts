@@ -1,18 +1,21 @@
-import Field = require('./Field');
-import Player = require('./Player');
-import Actuator = require('./Actuator');
-import Ball = require('./Ball');
-import Coordinate = require('./Coordinate');
+import Field            = require('./Field');
+import Player           = require('./Player');
+import PlayerGovernor   = require('./PlayerGovernor');
+import Actuator         = require('./Actuator');
+import InputProcessor   = require('./InputProcessor');
+import Ball             = require('./Ball');
+import Coordinate       = require('./Coordinate');
 
-import FieldView = require('./View/FieldView');
-import Color = require("game/View/Color");
-import PlayerView = require("./View/PlayerView");
-import BallView = require("./View/BallView");
+import FieldView        = require('./View/FieldView');
+import Color            = require("game/View/Color");
+import PlayerView       = require("./View/PlayerView");
+import BallView         = require("./View/BallView");
 
 class Game {
     private roundLength:number = 100;
     private field:Field;
     private players:Player[];
+    private inputProcessors:InputProcessor[];
     private actuators:Actuator[];
     private ball:Ball;
 
@@ -31,6 +34,10 @@ class Game {
         ];
 
         // At first always the second player is controlled by AI.
+        this.inputProcessors = [
+            new InputProcessor(this.players[0])
+        ];
+
         this.actuators = [
             new Actuator(this.players[1])
         ];
@@ -47,11 +54,12 @@ class Game {
     }
 
     public start() {
+        this.inputProcessors[0].activatePlayerInterface();
         this.playRound(1);
     }
 
     private playRound(round:number):void {
-        console.info('play round #' + round);
+        //console.info('play round #' + round);
 
         this.players[0].move();
         // At first always the second player is controlled by AI.
@@ -59,7 +67,7 @@ class Game {
         this.players[1].move();
         this.ball.move();
 
-        console.log('Chosen decision: ');
+        /*console.log('Chosen decision: ');
         console.log(this.actuators[0].decision);
         console.log('Player 1 position: ');
         console.log(this.players[0].coordinate);
@@ -72,7 +80,7 @@ class Game {
         console.log('Ball position: ');
         console.log(this.ball.coordinate);
         console.log('Ball speed: ');
-        console.log(this.ball.speed);
+        console.log(this.ball.speed);*/
 
         this.draw();
 
