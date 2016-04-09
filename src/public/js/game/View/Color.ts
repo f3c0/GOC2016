@@ -4,7 +4,7 @@ class Color {
     static Grass:Color = new Color(150, 255, 150);
     static Player1:Color = new Color(255, 0, 0);
     static Player2:Color = new Color(0, 0, 255);
-    static Ball:Color = new Color(255, 0, 255);
+    static Ball:Color = new Color(10, 10, 10);
 
     constructor(public red:number, public green:number, public blue:number) {
     }
