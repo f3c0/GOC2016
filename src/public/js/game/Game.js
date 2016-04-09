@@ -8,10 +8,11 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.master = master;
             this.roundLength = 25;
             this.roundNumber = 10000;
+            this.inputProcessors = [];
+            this.actuators = [];
             this.config = new Config();
             this.field = new Field(this.canvas.width, this.canvas.height);
             this.players = [];
-            this.actuators = [];
             this.gates = [
                 new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
                 new Gate(this.field.width, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth)

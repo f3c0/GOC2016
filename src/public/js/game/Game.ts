@@ -22,8 +22,8 @@ class Game {
     private field:Field;
     private gates:Gate[];
     private players:Player[];
-    private inputProcessors:InputProcessor[];
-    private actuators:Actuator[];
+    private inputProcessors:InputProcessor[] = [];
+    private actuators:Actuator[] = [];
     private ball:Ball;
 
     private fieldView:FieldView;
@@ -36,7 +36,6 @@ class Game {
         this.config = new Config();
         this.field = new Field(this.canvas.width, this.canvas.height);
         this.players = [];
-        this.actuators = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
