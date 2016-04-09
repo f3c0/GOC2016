@@ -5,3 +5,30 @@
 .img-nf {
 	width: 50px;
 }
+
+body h1,
+body .copy,
+body .score {
+	color: #fff;
+}
+
+body {
+	background-image: url('/static/img/grass.jpg');
+}
+
+body h2 {
+	padding-left: 70px;
+	color: #fff;
+}
+
+.score {
+	padding: 0 70px;
+	margin: 0;
+}
+
+#game {
+	display: block;
+	margin: 30px auto;
+	border: 1px solid #fff;
+	background-color: rgba(0,0,0,0.2);
+}

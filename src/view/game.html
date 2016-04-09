@@ -1,15 +1,21 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Goal game</title>
-    <script data-main="/static/js/main" src="/static/js/lib/require.js"></script>
+	<meta charset="utf-8">
+	<title>Goal game</title>
+	<script data-main="/static/js/main" src="/static/js/lib/require.js"></script>
+	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 </head>
 <body>
-<div style="width: 1000px;">
-    <div style="float: left; font-size: 48px;" id="score1">0</div>
-    <div style="float: right; font-size: 48px;" id="score2">0</div>
-    <canvas id="game" width="1000" height="500" style="border: 1px solid #cccccc;"></canvas>
-</div>
+	<div class="container game">
+		<h2 class="title">Score</h2>
+		<div class="row">
+			<div class="col-md-6"><h1 style="" id="score1" class="score">0</h1></div>
+			<div class="col-md-6"> <h1 style="" id="score2" class="score pull-right">0</h1></div>
+		</div>
+
+	    <canvas id="game" width="1000" height="500" style="border: 1px solid #cccccc;"></canvas>
+	</div>
 </body>
 </html>
