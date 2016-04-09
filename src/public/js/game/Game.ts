@@ -62,6 +62,24 @@ class Game {
         this.ballView = new BallView(this.ctx);
     }
 
+    private reset() {
+        this.ball.coordinate.x = this.field.width / 2;
+        this.ball.coordinate.y = this.field.height / 2;
+        this.ball.speed = 0;
+
+        this.players[0].coordinate.x = this.field.width / 4;
+        this.players[0].coordinate.y = this.field.height / 2;
+        this.players[0].speed = 0;
+        this.players[0].acceleration = 0;
+        this.players[0].direction = 0;
+
+        this.players[1].coordinate.x = 3 * this.field.width / 4;
+        this.players[1].coordinate.y = this.field.height / 2;
+        this.players[1].speed = 0;
+        this.players[1].acceleration = 0;
+        this.players[1].direction = Math.PI;
+    }
+
     public start() {
         this.inputProcessors[0].activatePlayerInterface();
         this.playRound(1);
@@ -113,12 +131,24 @@ class Game {
     }
 
     private handleCollisions():void {
+        this.handleScoreCollision();
         this.handleCollisionBallWall();
         this.handleCollisionBallPlayer();
     }
 
+    private handleScoreCollision() {
+        if (this.ball.coordinate.x <= this.gates[0].x && this.ball.coordinate.y > this.gates[0].y && this.ball.coordinate.y < this.gates[0].y + this.gates[0].wide) {
+            this.players[1].incScore();
+            this.reset();
+        }
+        if (this.ball.coordinate.x >= this.gates[1].x && this.ball.coordinate.y > this.gates[1].y && this.ball.coordinate.y < this.gates[1].y + this.gates[1].wide) {
+            this.players[0].incScore();
+            this.reset();
+        }
+    };
+
     private handleCollisionBallPlayer() {
-        this.players.forEach(function (player) {
+        this.players.forEach((player) => {
             if (Math.pow(player.r + this.ball.r, 2) >= Math.pow(player.coordinate.x - this.ball.coordinate.x, 2) + Math.pow(player.coordinate.y - this.ball.coordinate.y, 2)) {
                 var directionPlayerToBall = Math.atan((this.ball.coordinate.y - player.coordinate.y) / ( this.ball.coordinate.x - player.coordinate.x ));
                 if (this.ball.coordinate.x < player.coordinate.x) {

@@ -9,6 +9,7 @@ class Player extends GameObject {
     private rotationDegree = Math.PI / 12;
     private _color:Color;
     private _r = 15;
+    private _score:number = 0;
 
     get color():Color {
         return this._color;
@@ -16,6 +17,10 @@ class Player extends GameObject {
 
     get r() {
         return this._r;
+    }
+
+    get score():number {
+        return this._score;
     }
 
     constructor(public coordinate:Coordinate, public direction:number, public field:Field, public name:string, color:Color) {
@@ -41,6 +46,10 @@ class Player extends GameObject {
 
     public rotateRight() {
         this.direction += this.rotationDegree;
+    }
+
+    incScore():void {
+        this._score++;
     }
 
     public move() {
