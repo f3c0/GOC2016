@@ -11,6 +11,8 @@ import BallView = require("./View/BallView");
 
 class Game {
     private roundLength:number = 100;
+    private roundNumber:number = 100;
+
     private field:Field;
     private players:Player[];
     private actuators:Actuator[];
@@ -20,25 +22,23 @@ class Game {
     private playerView:PlayerView;
     private ballView:BallView;
 
-    private roundNumber:number = 100;
     private ctx;
 
     constructor(public canvas:HTMLCanvasElement) {
-        this.field = new Field(200, 100);
+        this.field = new Field(this.canvas.width, this.canvas.height);
+
         this.players = [
             new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob', Color.Player1),
             new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
         ];
+
+        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 0);
 
         // At first always the second player is controlled by AI.
         this.actuators = [
             new Actuator(this.players[1])
         ];
 
-        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 0);
-
-        this.canvas.width = this.field.width;
-        this.canvas.height = this.field.height;
         this.ctx = this.canvas.getContext('2d');
 
         this.fieldView = new FieldView(this.ctx);
