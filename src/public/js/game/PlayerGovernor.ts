@@ -7,7 +7,7 @@ abstract class PlayerGovernor
     protected static rotateLeft:string  = 'rotateLeft';
     protected static rotateRight:string = 'rotateRight';
 
-    protected decision;
+    private _decision;
 
     protected possibleDecisions = [
         PlayerGovernor.accelerate,
@@ -21,7 +21,7 @@ abstract class PlayerGovernor
     }
 
     protected actuate() {
-        switch(this.decision) {
+        switch(this._decision) {
             case PlayerGovernor.accelerate:
                 this.player.accelerate();
                 break;
@@ -38,6 +38,14 @@ abstract class PlayerGovernor
                 this.player.rotateRight();
                 break;
         }
+    }
+
+    get decision() {
+        return this._decision;
+    }
+
+    set decision(value) {
+        this._decision = value;
     }
 }
 

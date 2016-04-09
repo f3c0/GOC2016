@@ -4,9 +4,9 @@ import Field      = require("./Field");
 import Color      = require("./View/Color");
 
 class Player extends GameObject {
-    private maxAcceleration = 2;
-    private minAcceleration = -2;
-    private rotationDegree = Math.PI / 12;
+    private maxAcceleration = 1;
+    private minAcceleration = -1;
+    private rotationDegree = Math.PI / 6;
     private _color:Color;
     private _r = 15;
     private _score:number = 0;

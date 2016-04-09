@@ -1,5 +1,5 @@
 class Config {
-    public static numberOfPlayersPerTeam = 4;
+    public static numberOfPlayersPerTeam = 1;
 
     constructor() {
 
