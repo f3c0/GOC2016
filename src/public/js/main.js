@@ -35,10 +35,10 @@ require(['jquery', 'page'], function($, page) {
 	  require(['offlineController']);
 	});
 
-	page('/test/:room', function(context){
+	page('/room/:room', function(context){
 		//Game
 		config.roomName = context.params.room;
-	  require(['testController']);
+	  require(['gameController']);
 	});
 
 
