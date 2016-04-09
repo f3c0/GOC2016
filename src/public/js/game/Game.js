@@ -75,15 +75,13 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.actuators.forEach(function (actor) {
                 actor.decide();
             });
-            this.players.forEach(function (player, index) {
-                if (index === this.inputProcessorIndex) {
-                    player.move();
-                }
-            }, this);
             if (this.master) {
+                this.players.forEach(function (player, index) {
+                    player.move();
+                }, this);
                 this.ball.move();
+                this.handleCollisions();
             }
-            this.handleCollisions();
             if (this.onAfterStep) {
                 this.onAfterStep(this.players, this.ball);
             }

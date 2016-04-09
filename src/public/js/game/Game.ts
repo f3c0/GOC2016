@@ -129,17 +129,16 @@ class Game {
         this.actuators.forEach(function (actor) {
             actor.decide();
         });
-        this.players.forEach(function (player, index) {
-            if (index === this.inputProcessorIndex) {
-                player.move();
-            }
-        }, this);
 
         if (this.master) {
-            this.ball.move();
-        }
+            this.players.forEach(function (player, index) {
+                player.move();
+            }, this);
 
-        this.handleCollisions();
+            this.ball.move();
+
+            this.handleCollisions();
+        }
 
         if (this.onAfterStep) {
             this.onAfterStep(this.players, this.ball);
@@ -157,7 +156,7 @@ class Game {
         this.ball.coordinate.y = coordinate.y;
     };
 
-    private draw() {
+    public draw() {
         this.fieldView.draw(this.field, this.gates);
         this.players.forEach(function (player) {
             this.playerView.draw(player);
