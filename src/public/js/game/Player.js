@@ -15,7 +15,7 @@ define(["require", "exports", './GameObject'], function (require, exports, GameO
             this.maxAcceleration = 1;
             this.minAcceleration = -1;
             this.rotationDegree = Math.PI / 6;
-            this._r = 10;
+            this._r = 15;
             this._score = 0;
             this._color = color;
         }
