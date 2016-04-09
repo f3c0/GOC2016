@@ -80,15 +80,11 @@ class Game {
     }
 
     public addInputProcessor(index) {
-        this.inputProcessors = [
-            new InputProcessor(this.players[index])
-        ];
+        this.inputProcessors.push(new InputProcessor(this.players[index]));
     };
 
     public addAccurator(playerIndex) {
-        this.actuators.push(
-            new Actuator(this.players[playerIndex])
-        );
+        this.actuators.push(new Actuator(this.players[playerIndex]));
     }
 
     public getPlayer(index:number) {

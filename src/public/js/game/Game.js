@@ -33,9 +33,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.ballView = new BallView(this.ctx);
         }
         Game.prototype.addInputProcessor = function (index) {
-            this.inputProcessors = [
-                new InputProcessor(this.players[index])
-            ];
+            this.inputProcessors.push(new InputProcessor(this.players[index]));
         };
         ;
         Game.prototype.addAccurator = function (playerIndex) {
