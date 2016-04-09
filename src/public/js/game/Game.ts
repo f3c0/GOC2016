@@ -22,7 +22,7 @@ import Evaluator        = require("./Evaluator");
 
 class Game {
     private roundLength:number = 25;
-    private roundNumber:number = 10000;
+    private roundNumber:number = 100000;
 
     private config:Config;
     private field:Field;
@@ -70,7 +70,7 @@ class Game {
                         Math.random() * Math.PI * 2,
                         this.field,
                         'Bob' + (i + team * Config.numberOfPlayersPerTeam),
-                        Color.playerColors[team]
+                        team == 0 && i == 0 ? Color.playerColors[2] : Color.playerColors[team]
                     )
                 );
 

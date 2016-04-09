@@ -69,7 +69,12 @@ class Actuator extends PlayerGovernor
             actualPossibleDecisions.push(PlayerGovernor.decelerate);
         }
 
-        var randomDecision = actualPossibleDecisions[Math.floor(Math.random() * actualPossibleDecisions.length)];
+        var randomDecisionPool = [
+            'accelerate',
+            actualPossibleDecisions[Math.floor(Math.random() * actualPossibleDecisions.length)]
+        ];
+
+        var randomDecision = randomDecisionPool[Math.floor(Math.random() * randomDecisionPool.length)];
 
         this.decision      =
             typeof stateRepository.stateWithMaxValue == 'undefined'

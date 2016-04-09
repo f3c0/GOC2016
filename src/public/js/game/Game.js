@@ -7,7 +7,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.onAfterStep = onAfterStep;
             this.master = master;
             this.roundLength = 25;
-            this.roundNumber = 10000;
+            this.roundNumber = 100000;
             this.inputProcessors = [];
             this.actuators = [];
             this.inputProcessorIndex = 0;
@@ -26,7 +26,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
                     var xMax = this.field.width / 2 + xMin;
                     var xCoordinate = Math.random() * (xMax - 50 - xMin - 50) + xMin + 50;
                     var yCoordinate = Math.random() * (this.field.height - 50 - 50) + 50;
-                    this.players.push(new Player(new Coordinate(xCoordinate, yCoordinate), Math.random() * Math.PI * 2, this.field, 'Bob' + (i + team * Config.numberOfPlayersPerTeam), Color.playerColors[team]));
+                    this.players.push(new Player(new Coordinate(xCoordinate, yCoordinate), Math.random() * Math.PI * 2, this.field, 'Bob' + (i + team * Config.numberOfPlayersPerTeam), team == 0 && i == 0 ? Color.playerColors[2] : Color.playerColors[team]));
                     if (team != 0 || i != 0) {
                         this.actuators.push(new Actuator(this.players[i + team * Config.numberOfPlayersPerTeam]));
                         this.stateRepositories.push(new StateRepository());

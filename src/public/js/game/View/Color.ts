@@ -1,10 +1,11 @@
 class Color {
     static White:Color = new Color(255, 255, 255);
     static Black:Color = new Color(0, 0, 0);
-    static Grass:Color = new Color(150, 255, 150);
+    static Grass:Color = new Color(60, 180, 60);
     static playerColors = [
         new Color(255, 0, 0),
-        new Color(0, 0, 255)
+        new Color(0, 0, 255),
+        new Color(255, 235, 59)
     ];
     static Ball:Color = new Color(10, 10, 10);
 
