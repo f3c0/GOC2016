@@ -10,6 +10,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.roundNumber = 10000;
             this.inputProcessors = [];
             this.actuators = [];
+            this.inputProcessorIndex = 0;
             this.config = new Config();
             this.field = new Field(this.canvas.width, this.canvas.height);
             this.players = [];
@@ -34,6 +35,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.ballView = new BallView(this.ctx);
         }
         Game.prototype.addInputProcessor = function (index) {
+            this.inputProcessorIndex = index;
             this.inputProcessors.push(new InputProcessor(this.players[index]));
         };
         ;
@@ -74,7 +76,9 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
                 actor.decide();
             });
             this.players.forEach(function (player, index) {
-                player.move();
+                if (index === this.inputProcessorIndex) {
+                    player.move();
+                }
             }, this);
             if (this.master) {
                 this.ball.move();

@@ -30,6 +30,8 @@ class Game {
     private playerView:PlayerView;
     private ballView:BallView;
 
+    private inputProcessorIndex = 0;
+
     private ctx;
 
     constructor(public canvas:HTMLCanvasElement, public onAfterStep = null, public master:boolean = true) {
@@ -79,6 +81,7 @@ class Game {
     }
 
     public addInputProcessor(index) {
+        this.inputProcessorIndex = index;
         this.inputProcessors.push(new InputProcessor(this.players[index]));
     };
 
@@ -127,7 +130,9 @@ class Game {
             actor.decide();
         });
         this.players.forEach(function (player, index) {
-            player.move();
+            if (index === this.inputProcessorIndex) {
+                player.move();
+            }
         }, this);
 
         if (this.master) {
