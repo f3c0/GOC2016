@@ -5,7 +5,7 @@ class GameObject
     private maxSpeed = 5;
     private minSpeed = 0;
 
-    speed:number = 0;
+    public speed:number = 0;
     public acceleration:number = 0;
 
     constructor(public coordinate:Coordinate, public direction:number)

@@ -23,7 +23,7 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
             this.playerView = new PlayerView(this.ctx);
         }
         Game.prototype.start = function () {
-            this.playRound(0);
+            this.playRound(1);
         };
         Game.prototype.playRound = function (round) {
             var _this = this;
@@ -33,6 +33,20 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
             this.actuators[0].decide();
             this.players[1].move();
             this.ball.move();
+            console.log('Chosen decision: ');
+            console.log(this.actuators[0].decision);
+            console.log('Player 1 position: ');
+            console.log(this.players[0].coordinate);
+            console.log('Player 1 speed: ');
+            console.log(this.players[0].speed);
+            console.log('Player 2 position: ');
+            console.log(this.players[1].coordinate);
+            console.log('Player 2 speed: ');
+            console.log(this.players[1].speed);
+            console.log('Ball position: ');
+            console.log(this.ball.coordinate);
+            console.log('Ball speed: ');
+            console.log(this.ball.speed);
             this.draw();
             if (round < this.roundNumber) {
                 setTimeout(function () { return _this.playRound(round + 1); }, this.roundLength);

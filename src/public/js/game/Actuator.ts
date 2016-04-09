@@ -2,7 +2,7 @@ import Player = require('game/Player');
 
 class Actuator
 {
-    private decision;
+    public decision;
 
     private possibleDecisions = [
         'accelerate',

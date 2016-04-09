@@ -12,7 +12,7 @@ define(["require", "exports", 'game/GameObject'], function (require, exports, Ga
             this.direction = direction;
             this.name = name;
             this.maxAcceleration = 2;
-            this.minAcceleration = 0;
+            this.minAcceleration = -2;
             this.rotationDegree = Math.PI / 36;
             this._color = color;
         }

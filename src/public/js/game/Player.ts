@@ -4,7 +4,7 @@ import Color = require("./View/Color");
 
 class Player extends GameObject {
     private maxAcceleration = 2;
-    private minAcceleration = 0;
+    private minAcceleration = -2;
     private rotationDegree = Math.PI / 36;
     private _color:Color;
 
