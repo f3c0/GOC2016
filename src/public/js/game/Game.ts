@@ -154,7 +154,7 @@ class Game {
 
         this.actuators.forEach(
             function (actor, index) {
-                actor.decide(this.stateRepositories[index]);
+                //actor.decide(this.stateRepositories[index]);
             },
             this
         );

@@ -86,7 +86,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             //console.info('play round #' + round);
             var _this = this;
             this.actuators.forEach(function (actor, index) {
-                actor.decide(this.stateRepositories[index]);
+                //actor.decide(this.stateRepositories[index]);
             }, this);
             this.players.forEach(function (player) {
                 player.move();
