@@ -58,7 +58,7 @@ abstract class View {
         ball.onload = function() {
             self.ctx.drawImage(ball, x, y, r * 2, r * 2);
         };
-        ball.src = "src/public/img/ball.png";
+        ball.src = "/static/image/ball.png";
     }
 }
 

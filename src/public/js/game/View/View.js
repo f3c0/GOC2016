@@ -52,6 +52,14 @@ define(["require", "exports"], function (require, exports) {
             this.ctx.fillStyle = color.toString();
             this.ctx.fill();
         };
+        View.prototype.drawBall = function (x, y, r) {
+            var ball = new Image();
+            var self = this;
+            ball.onload = function () {
+                self.ctx.drawImage(ball, x, y, r * 2, r * 2);
+            };
+            ball.src = "/static/image/ball.png";
+        };
         return View;
     })();
     return View;
