@@ -50,6 +50,16 @@ abstract class View {
         this.ctx.fillStyle = color.toString();
         this.ctx.fill();
     }
+
+    protected drawBall(x:number, y:number, r:number) {
+        var ball = new Image();
+
+        var self = this;
+        ball.onload = function() {
+            self.ctx.drawImage(ball, x, y, r * 2, r * 2);
+        };
+        ball.src = "src/public/img/ball.png";
+    }
 }
 
 export = View;
