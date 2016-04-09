@@ -53,10 +53,13 @@ class Game {
     private playRound(round:number):void {
         console.info('play round #' + round);
 
-        this.players[0].move();
-        // At first always the second player is controlled by AI.
-        this.actuators[0].decide();
-        this.players[1].move();
+        this.actuators.forEach(function(actor) {
+            actor.decide();
+        });
+        this.players.forEach(function(player) {
+            player.move();
+        });
+
         this.ball.move();
 
         console.log('Chosen decision: ');
