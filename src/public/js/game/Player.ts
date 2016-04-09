@@ -82,7 +82,7 @@ class Player extends GameObject {
                 this.coordinate.x = this.r + 1;
             }
             else if (newX > this.field.width - this.r + 1) {
-                this.coordinate.x = this.field.width - 1;
+                this.coordinate.x = this.field.width - this.r / 2 - 1;
             }
 
             this.speed         = 1;
