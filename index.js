@@ -17,6 +17,10 @@ app.get('/offline', function(req, resp) {
 	resp.sendFile(__dirname + '/src/view/game.html');
 });
 
+app.get('/room/:game', function(req, resp) {
+	resp.sendFile(__dirname + '/src/view/game.html');
+});
+
 app.get('*', function(req, resp) {
 	resp.sendFile(__dirname + '/src/view/index.html');
 });
