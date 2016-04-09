@@ -41,6 +41,13 @@ abstract class View {
         this.ctx.strokeStyle = color.toString();
         this.ctx.stroke();
     }
+
+    protected fillArc(x:number, y:number, r:number, startAngle:number, endAngle:number, color:Color) {
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, r, startAngle, endAngle, false);
+        this.ctx.fillStyle = color.toString();
+        this.ctx.fill();
+    }
 }
 
 export = View;

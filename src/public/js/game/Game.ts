@@ -13,7 +13,7 @@ import BallView         = require("./View/BallView");
 
 class Game {
     private roundLength:number = 10;
-    private roundNumber:number = 1000;
+    private roundNumber:number = 10000000;
 
     private field:Field;
     private players:Player[];
@@ -35,7 +35,7 @@ class Game {
             new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
         ];
 
-        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20);
+        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), -2);
         this.ball.speed = 40;
 
         // At first always the second player is controlled by AI.
@@ -44,7 +44,7 @@ class Game {
         ];
 
         this.actuators = [
-            new Actuator(this.players[0]),
+            //new Actuator(this.players[0]),
             new Actuator(this.players[1])
         ];
 
@@ -76,19 +76,19 @@ class Game {
 
         console.log('Chosen decision: ');
         /*console.log('Chosen decision: ');
-        console.log(this.actuators[0].decision);
-        console.log('Player 1 position: ');
-        console.log(this.players[0].coordinate);
-        console.log('Player 1 speed: ');
-        console.log(this.players[0].speed);
-        console.log('Player 2 position: ');
-        console.log(this.players[1].coordinate);
-        console.log('Player 2 speed: ');
-        console.log(this.players[1].speed);
-        console.log('Ball position: ');
-        console.log(this.ball.coordinate);
-        console.log('Ball speed: ');
-        console.log(this.ball.speed);*/
+         console.log(this.actuators[0].decision);
+         console.log('Player 1 position: ');
+         console.log(this.players[0].coordinate);
+         console.log('Player 1 speed: ');
+         console.log(this.players[0].speed);
+         console.log('Player 2 position: ');
+         console.log(this.players[1].coordinate);
+         console.log('Player 2 speed: ');
+         console.log(this.players[1].speed);
+         console.log('Ball position: ');
+         console.log(this.ball.coordinate);
+         console.log('Ball speed: ');
+         console.log(this.ball.speed);*/
 
         this.draw();
 
@@ -107,13 +107,22 @@ class Game {
 
     private handleCollisions():void {
         this.handleCollisionBallWall();
+        this.handleCollisionBallPlayer();
+    }
 
+    private handleCollisionBallPlayer() {
         this.players.forEach(function (player) {
             if (Math.pow(player.r + this.ball.r, 2) >= Math.pow(player.coordinate.x - this.ball.coordinate.x, 2) + Math.pow(player.coordinate.y - this.ball.coordinate.y, 2)) {
-                this.ball.direction = Math.PI - this.ball.direction + Math.atan((player.coordinate.y - this.ball.coordinate.y) / (player.coordinate.x - this.ball.x)) + Math.PI / 2;
+                var directionPlayerToBall = Math.atan((this.ball.coordinate.y - player.coordinate.y) / ( this.ball.coordinate.x - player.coordinate.x ));
+                if (this.ball.coordinate.x < player.coordinate.x) {
+                    directionPlayerToBall += Math.PI;
+                }
+                this.ball.direction = directionPlayerToBall;
+                this.ball.speed += player.speed * 2;
+                player.acceleration = 0;
             }
         }, this);
-    }
+    };
 
     private handleCollisionBallWall() {
         if (this.ball.top <= 0 || this.ball.bottom >= this.field.width) {

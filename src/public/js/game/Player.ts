@@ -7,7 +7,7 @@ class Player extends GameObject {
     private minAcceleration = -2;
     private rotationDegree = Math.PI / 36;
     private _color:Color;
-    private _r = 10;
+    private _r = 30;
 
     get color():Color {
         return this._color;

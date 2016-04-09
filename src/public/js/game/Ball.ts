@@ -2,7 +2,7 @@ import GameObject = require('./GameObject');
 import Coordinate = require("./Coordinate");
 
 class Ball extends GameObject {
-    private _r:number = 2;
+    private _r:number = 10;
 
     get r():number {
         return this._r;
@@ -10,7 +10,7 @@ class Ball extends GameObject {
 
     constructor(coordinate:Coordinate, direction:number) {
         super(coordinate, direction);
-        this.acceleration = -0.001;
+        this.acceleration = -0.1;
     }
 
     get top():number {
