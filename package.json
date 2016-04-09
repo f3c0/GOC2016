@@ -13,5 +13,9 @@
     "lodash": "^4.9.0",
     "socket.io": "^1.4.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-tsc": "^1.1.5",
+    "gulp-typescript-compiler": "^1.0.1"
+  }
 }
