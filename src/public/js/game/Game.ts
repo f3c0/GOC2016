@@ -135,7 +135,7 @@ class Game {
         }, this);
 
         if (this.master) {
-            this.moveBall();
+            this.ball.move();
         }
 
         this.handleCollisions();
@@ -151,8 +151,9 @@ class Game {
         }
     }
 
-    public moveBall() {
-        this.ball.move();
+    public moveBall(coordinate:Coordinate) {
+        this.ball.coordinate.x = coordinate.x;
+        this.ball.coordinate.y = coordinate.y;
     };
 
     private draw() {

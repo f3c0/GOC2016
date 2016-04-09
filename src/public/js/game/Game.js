@@ -76,7 +76,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
                 player.move();
             }, this);
             if (this.master) {
-                this.moveBall();
+                this.ball.move();
             }
             this.handleCollisions();
             if (this.onAfterStep) {
@@ -87,8 +87,9 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
                 setTimeout(function () { return _this.playRound(round + 1); }, this.roundLength);
             }
         };
-        Game.prototype.moveBall = function () {
-            this.ball.move();
+        Game.prototype.moveBall = function (coordinate) {
+            this.ball.coordinate.x = coordinate.x;
+            this.ball.coordinate.y = coordinate.y;
         };
         ;
         Game.prototype.draw = function () {
