@@ -1,3 +1,4 @@
+import Config           = require('./Config');
 import Field            = require('./Field');
 import Player           = require('./Player');
 import PlayerGovernor   = require('./PlayerGovernor');
@@ -17,6 +18,7 @@ class Game {
     private roundLength:number = 25;
     private roundNumber:number = 10000;
 
+    private config:Config;
     private field:Field;
     private gates:Gate[];
     private players:Player[];
@@ -31,17 +33,34 @@ class Game {
     private ctx;
 
     constructor(public canvas:HTMLCanvasElement) {
-        this.field = new Field(this.canvas.width, this.canvas.height);
+        this.config = new Config();
+        this.field  = new Field(this.canvas.width, this.canvas.height);
+        this.players = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
             new Gate(this.field.width, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth)
         ];
 
-        this.players = [
-            new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, this.field, 'Bob', Color.Player1),
-            new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, this.field, 'Bobek', Color.Player2)
-        ];
+        for (var team = 0; team < 2; team++) {
+            for (var i = 0; i < Config.numberOfPlayersPerTeam; i++) {
+                var xMin = team * this.field.width / 2;
+                var xMax = this.field.width / 2 + xMin;
+
+                var xCoordinate = Math.random() * (xMax - 50 - xMin - 50) + xMin + 50;
+                var yCoordinate = Math.random() * (this.field.height - 50 - 50) + 50;
+
+                this.players.push(
+                    new Player(
+                        new Coordinate(xCoordinate, yCoordinate),
+                        Math.random() * Math.PI * 2,
+                        this.field,
+                        'Bob',
+                        Color.playerColors[team]
+                    )
+                );
+            }
+        }
 
         this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
         //this.ball.speed = 40;
@@ -52,8 +71,14 @@ class Game {
         ];
 
         this.actuators = [
-            //new Actuator(this.players[0]),
-            new Actuator(this.players[1])
+            new Actuator(this.players[1]),
+            new Actuator(this.players[2]),
+            new Actuator(this.players[3]),
+            new Actuator(this.players[4]),
+            new Actuator(this.players[5]),
+            new Actuator(this.players[6]),
+            new Actuator(this.players[7]),
+
         ];
 
         this.ctx = this.canvas.getContext('2d');
