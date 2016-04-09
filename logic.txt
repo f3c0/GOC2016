@@ -41,4 +41,10 @@ kicking the ball outside the boundaries
 
     -10 points
 
-the ball getting closer t
+the ball getting closer to the enemies gate
+
+    +2 points
+
+the ball getting far from the enemies gate
+
+    -2 points
