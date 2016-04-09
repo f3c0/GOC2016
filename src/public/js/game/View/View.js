@@ -5,6 +5,8 @@ define(["require", "exports"], function (require, exports) {
             this._lineWidth = 2;
             this._ctx = ctx;
             this.ctx.lineWidth = this.lineWidth;
+				this.ballImage = new Image();
+				this.ballImage.src = "/static/img/ball.png";
         }
         Object.defineProperty(View.prototype, "scale", {
             get: function () {
@@ -53,12 +55,7 @@ define(["require", "exports"], function (require, exports) {
             this.ctx.fill();
         };
         View.prototype.drawBall = function (x, y, r) {
-            var ball = new Image();
-            var self = this;
-            ball.onload = function () {
-                self.ctx.drawImage(ball, x, y, r * 2, r * 2);
-            };
-            ball.src = "/static/image/ball.png";
+				this.ctx.drawImage(this.ballImage, x, y, r * 2, r * 2);
         };
         return View;
     })();

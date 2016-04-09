@@ -1,1 +1,1 @@
-{"version":3,"file":"Config.js","sourceRoot":"","sources":["Config.ts"],"names":["Config","Config.constructor"],"mappings":";IAAA;QAGIA;QAEAC,CAACA;QAJaD,6BAAsBA,GAAGA,CAACA,CAACA;QAK7CA,aAACA;IAADA,CAACA,AAND,IAMC;IAED,OAAS,MAAM,CAAC"}
+{"version":3,"file":"Config.js","sourceRoot":"","sources":["Config.ts"],"names":[],"mappings":";;IAAA;QAGI;QAEA,CAAC;QAJa,6BAAsB,GAAG,CAAC,CAAC;QAK7C,aAAC;IAAD,CAAC,AAND,IAMC;IAED,OAAS,MAAM,CAAC"}
