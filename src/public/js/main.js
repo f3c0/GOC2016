@@ -11,7 +11,7 @@ requirejs.config({
 });
 
 var config = {
-	'wsIP':'localhost',
+	'wsIP':'10.0.105.101',
 	'wsPort':'7777',
 	'context': {}
 };

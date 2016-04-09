@@ -21,7 +21,7 @@ import StateRepository  = require("./StateRepository");
 import Evaluator        = require("./Evaluator");
 
 class Game {
-    private roundLength:number = 25;
+    private roundLength:number = 50;
     private roundNumber:number = 100000;
 
     private config:Config;
@@ -45,11 +45,11 @@ class Game {
     private evaluator:Evaluator;
 
     constructor(public canvas:HTMLCanvasElement, public onAfterStep = null, public master:boolean = true) {
-        this.config             = new Config();
-        this.field              = new Field(this.canvas.width, this.canvas.height);
-        this.players            = [];
-        this.actuators          = [];
-        this.stateRepositories  = [];
+        this.config = new Config();
+        this.field = new Field(this.canvas.width, this.canvas.height);
+        this.players = [];
+        this.actuators = [];
+        this.stateRepositories = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
@@ -91,9 +91,9 @@ class Game {
         //this.ball.speed = 40;
 
         // At first always the first player is controlled by the user.
-        this.inputProcessors = [
-            new InputProcessor(this.players[0])
-        ];
+        //this.inputProcessors = [
+        //    new InputProcessor(this.players[0])
+        //];
 
 
         this.ctx = this.canvas.getContext('2d');
@@ -104,6 +104,7 @@ class Game {
     }
 
     public addInputProcessor(index) {
+        console.info('inputProcessor', index, this.players);
         this.inputProcessorIndex = index;
         this.inputProcessors.push(new InputProcessor(this.players[index]));
     };
@@ -143,6 +144,7 @@ class Game {
 
     public start() {
         this.evaluator = new Evaluator();
+        console.info(this.inputProcessors);
         this.inputProcessors[0].activatePlayerInterface();
         this.playRound(1);
     }
@@ -267,14 +269,13 @@ class Game {
         }
     };
 
-    private getGameState(index)
-    {
+    private getGameState(index) {
         var gameState = new GameState();
 
-        gameState.gateWidth      = this.field.gateWidth;
-        gameState.ballPosition   = this.ball.coordinate;
+        gameState.gateWidth = this.field.gateWidth;
+        gameState.ballPosition = this.ball.coordinate;
         gameState.playerPosition = this.players[index + 1].coordinate;
-        gameState.decision       = this.actuators[index].decision;
+        gameState.decision = this.actuators[index].decision;
 
         return gameState;
     }

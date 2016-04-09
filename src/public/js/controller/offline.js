@@ -4,6 +4,7 @@ define(['jquery', 'game/Game'], function($, Game) {
 	var canvas = document.getElementById('game');
 
 	var game = new Game(canvas);
+	game.addInputProcessor(0)
 
 	game.start();
 });

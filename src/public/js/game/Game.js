@@ -6,7 +6,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.canvas = canvas;
             this.onAfterStep = onAfterStep;
             this.master = master;
-            this.roundLength = 25;
+            this.roundLength = 50;
             this.roundNumber = 100000;
             this.inputProcessors = [];
             this.actuators = [];
@@ -36,15 +36,16 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
             //this.ball.speed = 40;
             // At first always the first player is controlled by the user.
-            this.inputProcessors = [
-                new InputProcessor(this.players[0])
-            ];
+            //this.inputProcessors = [
+            //    new InputProcessor(this.players[0])
+            //];
             this.ctx = this.canvas.getContext('2d');
             this.fieldView = new FieldView(this.ctx);
             this.playerView = new PlayerView(this.ctx);
             this.ballView = new BallView(this.ctx);
         }
         Game.prototype.addInputProcessor = function (index) {
+            console.info('inputProcessor', index, this.players);
             this.inputProcessorIndex = index;
             this.inputProcessors.push(new InputProcessor(this.players[index]));
         };
@@ -77,6 +78,7 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
         };
         Game.prototype.start = function () {
             this.evaluator = new Evaluator();
+            console.info(this.inputProcessors);
             this.inputProcessors[0].activatePlayerInterface();
             this.playRound(1);
         };
