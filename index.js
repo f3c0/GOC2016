@@ -56,60 +56,24 @@ io.on('connection', function(socket) {
 
 			    		socket.emit('message', message);
 			    	break;
-					case 'offer':
+					case 'data':
+						console.log(data);
 					    var message = {
-							'type': 'offer',
+							'type': 'data',
 							'result': false,
 							'id': socket.id,
 					    };
 
-			    		if(typeof data.offer !== 'undefined' && typeof data.room != 'undefined' && roomHandler.isRoom(data.room)) {
-							console.log('Jött egy offer!');
+			    		if(typeof data.data !== 'undefined' && typeof data.room != 'undefined' && roomHandler.isRoom(data.room)) {
 							var participants = roomHandler.getUsersInRoomExceptMe(data.room, socket.id);
 							if(participants.length > 0) {
-								 console.log('Offer: Több mint egy participant.');
-							    message.offer = data.offer;
+							    message.data = data.data;
 							    message.result = true;
 							    participants[0].emit('message', message);
 							}
 			    		}
 			    	break;
-					case 'answer':
-						var message = {
-						'type': 'answer',
-						'result': false,
-						'id': socket.id
-						};
 
-			    	if(typeof data.answer !== 'undefined' && typeof data.room !== 'undefined' && roomHandler.isRoom(data.room)) {
-						var participants = roomHandler.getUsersInRoomExceptMe(data.room, socket.id);
-						console.log('Jött egy answer.');
-						if(participants.length > 0) {
-						    message.answer = data.answer;
-						    message.result = true;
-						    console.log('Answer: Több mint egy participant.');
-						    participants[0].emit('message', message);
-						}
-			    	}
-			    break;
-				 case 'candidate':
-				    var message = {
-						'type': 'candidate',
-						'result': false,
-						'id': socket.id
-				    };
-
-					if(typeof data.candidate !== 'undefined' && typeof data.room !== 'undefined' && roomHandler.isRoom(data.room)) {
-						var participants = roomHandler.getUsersInRoomExceptMe(data.room, socket.id);
-						console.log('Jött egy candidate.');
-						if(participants.length > 0) {
-							message.candidate = data.candidate;
-							message.result = true;
-							console.log('Candidate: Több mint egy participant.');
-							participants[0].emit('message', message);
-						}
-					}
-			    break;
 		    }
 		}
 	 });
