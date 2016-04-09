@@ -1,4 +1,4 @@
-import Coordinate = require('game/Coordinate');
+import Coordinate = require('./Coordinate');
 
 class GameObject
 {

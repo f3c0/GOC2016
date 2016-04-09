@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'game/View/Color', 'game/View/View'], function (require, exports, Color, View) {
+define(["require", "exports", './View/Color', './View/View'], function (require, exports, Color, View) {
     var FieldView = (function (_super) {
         __extends(FieldView, _super);
         function FieldView() {

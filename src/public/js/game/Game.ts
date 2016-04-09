@@ -1,14 +1,13 @@
-import Field = require('game/Field');
-import Player = require('game/Player');
-import Actuator = require('game/Actuator');
-import Ball = require('game/Ball');
-import Coordinate = require('game/Coordinate');
+import Field = require('./Field');
+import Player = require('./Player');
+import Actuator = require('./Actuator');
+import Ball = require('./Ball');
+import Coordinate = require('./Coordinate');
 
-import FieldView = require('game/View/FieldView');
+import FieldView = require('./View/FieldView');
 import Color = require("./View/Color");
 import PlayerView = require("./View/PlayerView");
-//import PlayerView = require('game/View/PlayerView');
-//import BallView = require('game/View/BallView');
+import BallView = require("./View/BallView");
 
 class Game {
     private roundLength:number = 100;
@@ -19,6 +18,7 @@ class Game {
 
     private fieldView:FieldView;
     private playerView:PlayerView;
+    private ballView:BallView;
 
     private roundNumber:number = 100;
     private ctx;
@@ -42,6 +42,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d');
 
         this.fieldView = new FieldView(this.ctx);
+        this.playerView = new PlayerView(this.ctx);
         this.playerView = new PlayerView(this.ctx);
     }
 

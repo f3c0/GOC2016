@@ -1,5 +1,5 @@
-import GameObject = require('game/GameObject');
-import Coordinate = require('game/Coordinate');
+import GameObject = require('./GameObject');
+import Coordinate = require('./Coordinate');
 import Color = require("./View/Color");
 
 class Player extends GameObject {

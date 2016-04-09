@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'game/GameObject'], function (require, exports, GameObject) {
+define(["require", "exports", './GameObject'], function (require, exports, GameObject) {
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player(coordinate, direction, name, color) {

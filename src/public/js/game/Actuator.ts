@@ -1,4 +1,4 @@
-import Player = require('game/Player');
+import Player = require('./Player');
 
 class Actuator
 {

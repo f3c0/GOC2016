@@ -13,6 +13,7 @@ define(["require", "exports"], function (require, exports) {
         Color.Grass = new Color(150, 255, 150);
         Color.Player1 = new Color(255, 0, 0);
         Color.Player2 = new Color(0, 0, 255);
+        Color.Ball = new Color(255, 0, 255);
         return Color;
     })();
     return Color;

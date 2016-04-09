@@ -1,4 +1,4 @@
-import GameObject = require('game/GameObject');
+import GameObject = require('./GameObject');
 
 class Ball extends GameObject {
 }

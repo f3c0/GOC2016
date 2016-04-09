@@ -1,6 +1,4 @@
-define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'game/Ball', 'game/Coordinate', 'game/View/FieldView', "./View/Color", "./View/PlayerView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView) {
-    //import PlayerView = require('game/View/PlayerView');
-    //import BallView = require('game/View/BallView');
+define(["require", "exports", './Field', './Player', './Actuator', './Ball', './Coordinate', './View/FieldView', "./View/Color", "./View/PlayerView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView) {
     var Game = (function () {
         function Game(canvas) {
             this.canvas = canvas;
@@ -20,6 +18,7 @@ define(["require", "exports", 'game/Field', 'game/Player', 'game/Actuator', 'gam
             this.canvas.height = this.field.height;
             this.ctx = this.canvas.getContext('2d');
             this.fieldView = new FieldView(this.ctx);
+            this.playerView = new PlayerView(this.ctx);
             this.playerView = new PlayerView(this.ctx);
         }
         Game.prototype.start = function () {

@@ -3,14 +3,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'game/View/View'], function (require, exports, View) {
+define(["require", "exports", './View/View'], function (require, exports, View) {
     var PlayerView = (function (_super) {
         __extends(PlayerView, _super);
         function PlayerView() {
             _super.apply(this, arguments);
         }
         PlayerView.prototype.draw = function (player) {
-            console.info(player.color);
             this.drawCircle(player.coordinate.x, player.coordinate.y, 10, player.color);
         };
         return PlayerView;
