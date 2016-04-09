@@ -41,6 +41,11 @@ RoomHandler.prototype.getUsersInRoomExceptMe = function(roomName, socketId) {
     return users;
 };
 
+RoomHandler.prototype.getUsersInRoom = function(roomName) {
+    var roomKey = this.findRoom(roomName);
+    return this.rooms[roomKey].users;
+};
+
 RoomHandler.prototype.findRoom = function(name) {
     return Lodash.findIndex(this.rooms, function(room) {
 	return (room.name === name) ? true : false;

@@ -28,13 +28,15 @@ class Game {
     private field:Field;
     private gates:Gate[];
     private players:Player[];
-    private inputProcessors:InputProcessor[];
-    private actuators:Actuator[];
+    private inputProcessors:InputProcessor[] = [];
+    private actuators:Actuator[] = [];
     private ball:Ball;
 
     private fieldView:FieldView;
     private playerView:PlayerView;
     private ballView:BallView;
+
+    private inputProcessorIndex = 0;
 
     private ctx;
 
@@ -42,7 +44,7 @@ class Game {
     private stateRepositories:StateRepository[];
     private evaluator:Evaluator;
 
-    constructor(public canvas:HTMLCanvasElement) {
+    constructor(public canvas:HTMLCanvasElement, public onAfterStep = null, public master:boolean = true) {
         this.config             = new Config();
         this.field              = new Field(this.canvas.width, this.canvas.height);
         this.players            = [];
@@ -81,6 +83,7 @@ class Game {
                         new StateRepository()
                     );
                 }
+
             }
         }
 
@@ -92,11 +95,25 @@ class Game {
             new InputProcessor(this.players[0])
         ];
 
+
         this.ctx = this.canvas.getContext('2d');
 
         this.fieldView = new FieldView(this.ctx);
         this.playerView = new PlayerView(this.ctx);
         this.ballView = new BallView(this.ctx);
+    }
+
+    public addInputProcessor(index) {
+        this.inputProcessorIndex = index;
+        this.inputProcessors.push(new InputProcessor(this.players[index]));
+    };
+
+    public addAccurator(playerIndex) {
+        this.actuators.push(new Actuator(this.players[playerIndex]));
+    }
+
+    public getPlayer(index:number) {
+        return this.players[index];
     }
 
     private reset() {
@@ -144,9 +161,19 @@ class Game {
             player.move();
         });
 
-        this.ball.move();
+        if (this.master) {
+            this.players.forEach(function (player, index) {
+                player.move();
+            }, this);
 
-        this.handleCollisions();
+            this.ball.move();
+
+            this.handleCollisions();
+        }
+
+        if (this.onAfterStep) {
+            this.onAfterStep(this.players, this.ball);
+        }
 
         // Store game state data for later use by AI
         this.stateRepositories.forEach(
@@ -165,7 +192,12 @@ class Game {
         }
     }
 
-    private draw() {
+    public moveBall(coordinate:Coordinate) {
+        this.ball.coordinate.x = coordinate.x;
+        this.ball.coordinate.y = coordinate.y;
+    };
+
+    public draw() {
         this.fieldView.draw(this.field, this.gates);
         this.players.forEach(function (player) {
             this.playerView.draw(player);

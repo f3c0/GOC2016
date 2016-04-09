@@ -1,6 +1,6 @@
 .idea
 node_modules
-src/public/js/game/*.js
-src/public/js/game/*.js.map
-src/public/js/game/View/*.js
-src/public/js/game/View/*.js.map
+#src/public/js/game/*.js
+#src/public/js/game/*.js.map
+#src/public/js/game/View/*.js
+#src/public/js/game/View/*.js.map
