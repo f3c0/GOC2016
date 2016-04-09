@@ -5,7 +5,8 @@ import View = require('game/View/View');
 class PlayerView extends View {
 
     public draw(player:Player) {
-        this.drawCircle(player.coordinate.x, player.coordinate.y, 10, player.color);
+        this.drawCircle(player.coordinate.x, player.coordinate.y, player.r, player.color);
+        this.fillArc(player.coordinate.x, player.coordinate.y, player.r, player.direction - 1, player.direction + 1, player.color);
     }
 }
 

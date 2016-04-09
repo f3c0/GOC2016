@@ -5,7 +5,7 @@ import View = require('game/View/View');
 class BallView extends View {
 
     public draw(ball:Ball) {
-        this.drawCircle(ball.coordinate.x, ball.coordinate.y, 2, Color.Ball);
+        this.drawCircle(ball.coordinate.x, ball.coordinate.y, ball.r, Color.Ball);
     }
 }
 

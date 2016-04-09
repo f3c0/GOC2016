@@ -3,7 +3,7 @@ import Coordinate = require("./Coordinate");
 import Field      = require("./Field");
 
 class Ball extends GameObject {
-    private _r:number = 2;
+    private _r:number = 10;
 
     get r():number {
         return this._r;

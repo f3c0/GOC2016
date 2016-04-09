@@ -107,7 +107,22 @@ class Game {
 
     private handleCollisions():void {
         this.handleCollisionBallWall();
+        this.handleCollisionBallPlayer();
     }
+
+    private handleCollisionBallPlayer() {
+        this.players.forEach(function (player) {
+            if (Math.pow(player.r + this.ball.r, 2) >= Math.pow(player.coordinate.x - this.ball.coordinate.x, 2) + Math.pow(player.coordinate.y - this.ball.coordinate.y, 2)) {
+                var directionPlayerToBall = Math.atan((this.ball.coordinate.y - player.coordinate.y) / ( this.ball.coordinate.x - player.coordinate.x ));
+                if (this.ball.coordinate.x < player.coordinate.x) {
+                    directionPlayerToBall += Math.PI;
+                }
+                this.ball.direction = directionPlayerToBall;
+                this.ball.speed += player.speed * 2;
+                player.acceleration = 0;
+            }
+        }, this);
+    };
 
     private handleCollisionBallWall() {
         if (this.ball.top <= 0 || this.ball.bottom >= this.field.width) {

@@ -8,9 +8,14 @@ class Player extends GameObject {
     private minAcceleration = -2;
     private rotationDegree = Math.PI / 12;
     private _color:Color;
+    private _r = 30;
 
     get color():Color {
         return this._color;
+    }
+
+    get r() {
+        return this._r;
     }
 
     constructor(public coordinate:Coordinate, public direction:number, public field:Field, public name:string, color:Color) {
