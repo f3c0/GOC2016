@@ -27,15 +27,17 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             }
             this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
             //this.ball.speed = 40;
-            // At first always the second player is controlled by AI.
-            this.inputProcessors = [
-                new InputProcessor(this.players[0])
-            ];
             this.ctx = this.canvas.getContext('2d');
             this.fieldView = new FieldView(this.ctx);
             this.playerView = new PlayerView(this.ctx);
             this.ballView = new BallView(this.ctx);
         }
+        Game.prototype.addInputProcessor = function (index) {
+            this.inputProcessors = [
+                new InputProcessor(this.players[index])
+            ];
+        };
+        ;
         Game.prototype.addAccurator = function (playerIndex) {
             this.actuators.push(new Actuator(this.players[playerIndex]));
         };
