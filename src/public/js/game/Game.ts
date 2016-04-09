@@ -99,22 +99,6 @@ class Game {
 
         this.handleCollisions();
 
-        /*console.log('Chosen decision: ');
-        console.log('Chosen decision: ');
-        console.log(this.actuators[0].decision);
-        console.log('Player 1 position: ');
-        console.log(this.players[0].coordinate);
-        console.log('Player 1 speed: ');
-        console.log(this.players[0].speed);
-        console.log('Player 2 position: ');
-        console.log(this.players[1].coordinate);
-        console.log('Player 2 speed: ');
-        console.log(this.players[1].speed);
-        console.log('Ball position: ');
-        console.log(this.ball.coordinate);
-        console.log('Ball speed: ');
-        console.log(this.ball.speed);*/
-
         this.draw();
 
         if (round < this.roundNumber) {
@@ -162,11 +146,12 @@ class Game {
     };
 
     private handleCollisionBallWall() {
-        if (this.ball.top <= 0 || this.ball.bottom >= this.field.width) {
-            this.ball.direction = Math.PI - this.ball.direction;
-        }
-        if (this.ball.left <= 0 || this.ball.right >= this.field.height) {
+        if (this.ball.top <= 0 || this.ball.bottom >= this.field.height) {
             this.ball.direction = 2 * Math.PI - this.ball.direction;
+        }
+        if (this.ball.left <= 0 && (this.ball.coordinate.y <= this.gates[0].y || this.ball.coordinate.y >= this.gates[0].y + this.gates[0].wide)
+            || this.ball.right >= this.field.width && (this.ball.coordinate.y <= this.gates[1].y || this.ball.coordinate.y >= this.gates[1].y + this.gates[1].wide)) {
+            this.ball.direction = Math.PI - this.ball.direction;
         }
     };
 }

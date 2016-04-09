@@ -8,7 +8,7 @@ class Player extends GameObject {
     private minAcceleration = -2;
     private rotationDegree = Math.PI / 12;
     private _color:Color;
-    private _r = 15;
+    private _r = 40;
     private _score:number = 0;
 
     get color():Color {
