@@ -5,7 +5,7 @@ import Ball = require('./Ball');
 import Coordinate = require('./Coordinate');
 
 import FieldView = require('./View/FieldView');
-import Color = require("./View/Color");
+import Color = require("game/View/Color");
 import PlayerView = require("./View/PlayerView");
 import BallView = require("./View/BallView");
 
@@ -43,7 +43,7 @@ class Game {
 
         this.fieldView = new FieldView(this.ctx);
         this.playerView = new PlayerView(this.ctx);
-        this.playerView = new PlayerView(this.ctx);
+        this.ballView = new BallView(this.ctx);
     }
 
     public start() {
@@ -86,6 +86,7 @@ class Game {
         this.players.forEach(function (player) {
             this.playerView.draw(player);
         }, this);
+        this.ballView.draw(this.ball);
     }
 }
 

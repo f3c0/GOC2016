@@ -1,4 +1,4 @@
-define(["require", "exports", './Field', './Player', './Actuator', './Ball', './Coordinate', './View/FieldView', "./View/Color", "./View/PlayerView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView) {
+define(["require", "exports", './Field', './Player', './Actuator', './Ball', './Coordinate', './View/FieldView', "game/View/Color", "./View/PlayerView", "./View/BallView"], function (require, exports, Field, Player, Actuator, Ball, Coordinate, FieldView, Color, PlayerView, BallView) {
     var Game = (function () {
         function Game(canvas) {
             this.canvas = canvas;
@@ -19,7 +19,7 @@ define(["require", "exports", './Field', './Player', './Actuator', './Ball', './
             this.ctx = this.canvas.getContext('2d');
             this.fieldView = new FieldView(this.ctx);
             this.playerView = new PlayerView(this.ctx);
-            this.playerView = new PlayerView(this.ctx);
+            this.ballView = new BallView(this.ctx);
         }
         Game.prototype.start = function () {
             this.playRound(1);
@@ -56,6 +56,7 @@ define(["require", "exports", './Field', './Player', './Actuator', './Ball', './
             this.players.forEach(function (player) {
                 this.playerView.draw(player);
             }, this);
+            this.ballView.draw(this.ball);
         };
         return Game;
     })();

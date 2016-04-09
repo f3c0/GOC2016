@@ -1,6 +1,6 @@
-import Color = require('./View/Color');
+import Color = require('game/View/Color');
 import Player = require('./Player');
-import View = require('./View/View');
+import View = require('game/View/View');
 
 class PlayerView extends View {
 

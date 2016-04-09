@@ -1,4 +1,4 @@
-import Color = require('./View/Color');
+import Color = require('game/View/Color');
 
 abstract class View {
     private _scale = 2;

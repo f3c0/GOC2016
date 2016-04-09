@@ -1,4 +1,4 @@
-define(['jquery', './Game'], function($, Game) {
+define(['jquery', 'game/Game'], function($, Game) {
 	console.log('Offline module loaded.');
 
 	var canvas = document.getElementById('game');
