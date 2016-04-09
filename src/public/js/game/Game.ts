@@ -97,13 +97,17 @@ class Game {
     }
 
     private handleCollisions():void {
-        if (this.ball.coordinate.x <= 0 || this.ball.coordinate.x >= this.field.width) {
+        this.handleCollisionBallWall();
+    }
+
+    private handleCollisionBallWall() {
+        if (this.ball.top <= 0 || this.ball.bottom >= this.field.width) {
             this.ball.direction = Math.PI - this.ball.direction;
         }
-        if (this.ball.coordinate.y <= 0 || this.ball.coordinate.y >= this.field.height) {
+        if (this.ball.left <= 0 || this.ball.right >= this.field.height) {
             this.ball.direction = 2 * Math.PI - this.ball.direction;
         }
-    }
+    };
 }
 
 export = Game;
