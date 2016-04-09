@@ -8,7 +8,7 @@ class Player extends GameObject {
     private minAcceleration = -2;
     private rotationDegree = Math.PI / 12;
     private _color:Color;
-    private _r = 30;
+    private _r = 15;
 
     get color():Color {
         return this._color;
@@ -47,14 +47,32 @@ class Player extends GameObject {
         var newX = this.coordinate.x + this.speed * Math.cos(this.direction);
         var newY = this.coordinate.y + this.speed * Math.sin(this.direction);
 
-        if (this.field.isWithinXBoundary(newX)) {
+        var newXEdge = this.coordinate.x;
+        if (newX < this.coordinate.x)
+        {
+            newXEdge = this.coordinate.x - this.r / 2 - 1;
+        }
+        else {
+            newXEdge = this.coordinate.x + this.r / 2 + 1;
+        }
+
+        var newYEdge = this.coordinate.y;
+        if (newY < this.coordinate.y)
+        {
+            newYEdge = this.coordinate.y - this.r / 2 - 1;
+        }
+        else {
+            newYEdge = this.coordinate.y + this.r / 2 + 1;
+        }
+
+        if (this.field.isWithinXBoundary(newXEdge)) {
             this.coordinate.x = newX;
         }
         else {
-            if (newX < 11) {
-                this.coordinate.x = 11;
+            if (newX < this.r + 1) {
+                this.coordinate.x = this.r + 1;
             }
-            else if (newX > this.field.width - 11) {
+            else if (newX > this.field.width - this.r + 1) {
                 this.coordinate.x = this.field.width - 1;
             }
 
@@ -62,16 +80,16 @@ class Player extends GameObject {
             this.acceleration  = 0;
         }
 
-        if (this.field.isWithinYBoundary(newY))
+        if (this.field.isWithinYBoundary(newYEdge))
         {
             this.coordinate.y = newY;
         }
         else {
-            if (newY < 11) {
-                this.coordinate.y = 11;
+            if (newY < this.r + 1) {
+                this.coordinate.y = this.r + 1;
             }
-            else if (newY > this.field.height - 11) {
-                this.coordinate.y = this.field.height - 11;
+            else if (newY > this.field.height - this.r + 1) {
+                this.coordinate.y = this.field.height - this.r + 1;
             }
 
             this.speed         = 1;
