@@ -1,7 +1,9 @@
 define(["require", "exports", './Config', './Field', './Player', './Actuator', './InputProcessor', './Ball', './Coordinate', './View/FieldView', "./View/Color", "./View/PlayerView", "./View/BallView", "./Gate", 'jquery'], function (require, exports, Config, Field, Player, Actuator, InputProcessor, Ball, Coordinate, FieldView, Color, PlayerView, BallView, Gate, $) {
     var Game = (function () {
-        function Game(canvas) {
+        function Game(canvas, onAfterStep) {
+            if (onAfterStep === void 0) { onAfterStep = null; }
             this.canvas = canvas;
+            this.onAfterStep = onAfterStep;
             this.roundLength = 25;
             this.roundNumber = 10000;
             this.config = new Config();
@@ -35,6 +37,9 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.playerView = new PlayerView(this.ctx);
             this.ballView = new BallView(this.ctx);
         }
+        Game.prototype.getPlayer = function (index) {
+            return this.players[index];
+        };
         Game.prototype.reset = function () {
             this.ball.coordinate.x = this.field.width / 2;
             this.ball.coordinate.y = this.field.height / 2;
@@ -65,9 +70,12 @@ define(["require", "exports", './Config', './Field', './Player', './Actuator', '
             this.actuators.forEach(function (actor) {
                 actor.decide();
             });
-            this.players.forEach(function (player) {
+            this.players.forEach(function (player, index) {
                 player.move();
-            });
+                if (this.onAfterStep) {
+                    this.onAfterStep(player, index);
+                }
+            }, this);
             this.ball.move();
             this.handleCollisions();
             this.draw();

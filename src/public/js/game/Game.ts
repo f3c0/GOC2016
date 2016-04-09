@@ -32,11 +32,11 @@ class Game {
 
     private ctx;
 
-    constructor(public canvas:HTMLCanvasElement) {
-        this.config     = new Config();
-        this.field      = new Field(this.canvas.width, this.canvas.height);
-        this.players    = [];
-        this.actuators  = [];
+    constructor(public canvas:HTMLCanvasElement, public onAfterStep = null) {
+        this.config = new Config();
+        this.field = new Field(this.canvas.width, this.canvas.height);
+        this.players = [];
+        this.actuators = [];
 
         this.gates = [
             new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
@@ -84,6 +84,10 @@ class Game {
         this.ballView = new BallView(this.ctx);
     }
 
+    public getPlayer(index:number) {
+        return this.players[index];
+    }
+
     private reset() {
         this.ball.coordinate.x = this.field.width / 2;
         this.ball.coordinate.y = this.field.height / 2;
@@ -120,9 +124,12 @@ class Game {
         this.actuators.forEach(function (actor) {
             actor.decide();
         });
-        this.players.forEach(function (player) {
+        this.players.forEach(function (player, index) {
             player.move();
-        });
+            if (this.onAfterStep) {
+                this.onAfterStep(player, index);
+            }
+        }, this);
 
         this.ball.move();
 
