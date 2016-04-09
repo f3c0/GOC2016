@@ -28,6 +28,7 @@ abstract class View {
         this.ctx.lineTo(x2, y2);
         this.ctx.strokeStyle = color.toString();
         this.ctx.stroke();
+        this.ctx.closePath();
     }
 
     protected fillRect(x1:number, y1:number, x2:number, y2:number, color:Color) {
@@ -40,6 +41,7 @@ abstract class View {
         this.ctx.arc(x, y, r, 0, 2 * Math.PI, false);
         this.ctx.strokeStyle = color.toString();
         this.ctx.stroke();
+        this.ctx.closePath();
     }
 }
 

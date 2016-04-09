@@ -1,4 +1,5 @@
 import Coordinate = require('./Coordinate');
+import Field      = require('./Field');
 
 class GameObject {
     private maxSpeed = 5;
@@ -7,7 +8,7 @@ class GameObject {
     public speed:number = 0;
     public acceleration:number = 0;
 
-    constructor(public coordinate:Coordinate, public direction:number) {
+    constructor(public coordinate:Coordinate, public direction:number, public field:Field) {
 
     }
 
@@ -18,7 +19,7 @@ class GameObject {
         this.calculateActualSpeed();
     }
 
-    private calculateActualSpeed() {
+    protected calculateActualSpeed() {
         this.speed += this.acceleration;
         if (this.speed > this.maxSpeed) {
             this.speed = this.maxSpeed;

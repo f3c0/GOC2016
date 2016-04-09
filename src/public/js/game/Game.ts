@@ -12,8 +12,8 @@ import PlayerView       = require("./View/PlayerView");
 import BallView         = require("./View/BallView");
 
 class Game {
-    private roundLength:number = 10;
-    private roundNumber:number = 1000;
+    private roundLength:number = 25;
+    private roundNumber:number = 10000;
 
     private field:Field;
     private players:Player[];
@@ -31,11 +31,11 @@ class Game {
         this.field = new Field(this.canvas.width, this.canvas.height);
 
         this.players = [
-            new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, 'Bob', Color.Player1),
-            new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
+            new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, this.field, 'Bob', Color.Player1),
+            new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, this.field, 'Bobek', Color.Player2)
         ];
 
-        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20);
+        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
         this.ball.speed = 40;
 
         // At first always the second player is controlled by AI.
@@ -44,7 +44,7 @@ class Game {
         ];
 
         this.actuators = [
-            new Actuator(this.players[0]),
+            //new Actuator(this.players[0]),
             new Actuator(this.players[1])
         ];
 
@@ -74,8 +74,8 @@ class Game {
 
         this.handleCollisions();
 
-        console.log('Chosen decision: ');
         /*console.log('Chosen decision: ');
+        console.log('Chosen decision: ');
         console.log(this.actuators[0].decision);
         console.log('Player 1 position: ');
         console.log(this.players[0].coordinate);
