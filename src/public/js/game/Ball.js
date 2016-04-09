@@ -6,8 +6,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 define(["require", "exports", './GameObject'], function (require, exports, GameObject) {
     var Ball = (function (_super) {
         __extends(Ball, _super);
-        function Ball() {
-            _super.apply(this, arguments);
+        function Ball(coordinate, direction) {
+            _super.call(this, coordinate, direction);
+            this.acceleration = -0.001;
         }
         return Ball;
     })(GameObject);

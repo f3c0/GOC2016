@@ -10,8 +10,8 @@ import PlayerView = require("./View/PlayerView");
 import BallView = require("./View/BallView");
 
 class Game {
-    private roundLength:number = 100;
-    private roundNumber:number = 100;
+    private roundLength:number = 10;
+    private roundNumber:number = 1000;
 
     private field:Field;
     private players:Player[];
@@ -32,10 +32,12 @@ class Game {
             new Player(new Coordinate(3 * this.field.width / 4, this.field.height / 2), Math.PI, 'Bobek', Color.Player2)
         ];
 
-        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 0);
+        this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20);
+        this.ball.speed = 40;
 
         // At first always the second player is controlled by AI.
         this.actuators = [
+            new Actuator(this.players[0]),
             new Actuator(this.players[1])
         ];
 
@@ -53,14 +55,16 @@ class Game {
     private playRound(round:number):void {
         console.info('play round #' + round);
 
-        this.actuators.forEach(function(actor) {
+        this.actuators.forEach(function (actor) {
             actor.decide();
         });
-        this.players.forEach(function(player) {
+        this.players.forEach(function (player) {
             player.move();
         });
 
         this.ball.move();
+
+        this.handleCollisions();
 
         console.log('Chosen decision: ');
         console.log(this.actuators[0].decision);
@@ -90,6 +94,15 @@ class Game {
             this.playerView.draw(player);
         }, this);
         this.ballView.draw(this.ball);
+    }
+
+    private handleCollisions():void {
+        if (this.ball.coordinate.x <= 0 || this.ball.coordinate.x >= this.field.width) {
+            this.ball.direction = Math.PI - this.ball.direction;
+        }
+        if (this.ball.coordinate.y <= 0 || this.ball.coordinate.y >= this.field.height) {
+            this.ball.direction = 2 * Math.PI - this.ball.direction;
+        }
     }
 }
 
