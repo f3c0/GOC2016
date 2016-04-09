@@ -4,7 +4,7 @@ define(["require", "exports"], function (require, exports) {
             this.coordinate = coordinate;
             this.direction = direction;
             this.field = field;
-            this.maxSpeed = 5;
+            this._maxSpeed = 5;
             this.minSpeed = 0;
             this.speed = 0;
             this.acceleration = 0;
@@ -16,13 +16,20 @@ define(["require", "exports"], function (require, exports) {
         };
         GameObject.prototype.calculateActualSpeed = function () {
             this.speed += this.acceleration;
-            if (this.speed > this.maxSpeed) {
-                this.speed = this.maxSpeed;
+            if (this.speed > this._maxSpeed) {
+                this.speed = this._maxSpeed;
             }
             else if (this.speed < this.minSpeed) {
                 this.speed = this.minSpeed;
             }
         };
+        Object.defineProperty(GameObject.prototype, "maxSpeed", {
+            get: function () {
+                return this._maxSpeed;
+            },
+            enumerable: true,
+            configurable: true
+        });
         return GameObject;
     })();
     return GameObject;

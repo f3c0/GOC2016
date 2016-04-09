@@ -10,7 +10,7 @@ define(["require", "exports"], function (require, exports) {
             ];
         }
         PlayerGovernor.prototype.actuate = function () {
-            switch (this.decision) {
+            switch (this._decision) {
                 case PlayerGovernor.accelerate:
                     this.player.accelerate();
                     break;
@@ -25,6 +25,16 @@ define(["require", "exports"], function (require, exports) {
                     break;
             }
         };
+        Object.defineProperty(PlayerGovernor.prototype, "decision", {
+            get: function () {
+                return this._decision;
+            },
+            set: function (value) {
+                this._decision = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
         PlayerGovernor.accelerate = 'accelerate';
         PlayerGovernor.decelerate = 'decelerate';
         PlayerGovernor.rotateLeft = 'rotateLeft';

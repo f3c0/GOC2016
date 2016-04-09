@@ -12,10 +12,10 @@ define(["require", "exports", './GameObject'], function (require, exports, GameO
             this.direction = direction;
             this.field = field;
             this.name = name;
-            this.maxAcceleration = 2;
-            this.minAcceleration = -2;
-            this.rotationDegree = Math.PI / 12;
-            this._r = 15;
+            this.maxAcceleration = 1;
+            this.minAcceleration = -1;
+            this.rotationDegree = Math.PI / 6;
+            this._r = 10;
             this._score = 0;
             this._color = color;
         }
@@ -88,6 +88,7 @@ define(["require", "exports", './GameObject'], function (require, exports, GameO
                 }
                 this.speed = 1;
                 this.acceleration = 0;
+                this.direction += Math.PI;
             }
             if (this.field.isWithinYBoundary(newYEdge)) {
                 this.coordinate.y = newY;
@@ -101,6 +102,7 @@ define(["require", "exports", './GameObject'], function (require, exports, GameO
                 }
                 this.speed = 1;
                 this.acceleration = 0;
+                this.direction += Math.PI;
             }
             this.calculateActualSpeed();
         };
