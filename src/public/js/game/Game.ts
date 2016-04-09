@@ -7,15 +7,17 @@ import Ball             = require('./Ball');
 import Coordinate       = require('./Coordinate');
 
 import FieldView        = require('./View/FieldView');
-import Color            = require("game/View/Color");
+import Color            = require("./View/Color");
 import PlayerView       = require("./View/PlayerView");
 import BallView         = require("./View/BallView");
+import Gate = require("./Gate");
 
 class Game {
     private roundLength:number = 25;
     private roundNumber:number = 10000;
 
     private field:Field;
+    private gates:Gate[];
     private players:Player[];
     private inputProcessors:InputProcessor[];
     private actuators:Actuator[];
@@ -29,6 +31,11 @@ class Game {
 
     constructor(public canvas:HTMLCanvasElement) {
         this.field = new Field(this.canvas.width, this.canvas.height);
+
+        this.gates = [
+            new Gate(0, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth),
+            new Gate(this.field.width, (this.field.height - this.field.gateWidth) / 2, this.field.gateWidth)
+        ];
 
         this.players = [
             new Player(new Coordinate(this.field.width / 4, this.field.height / 2), 0, this.field, 'Bob', Color.Player1),
@@ -98,7 +105,7 @@ class Game {
     }
 
     private draw() {
-        this.fieldView.draw(this.field);
+        this.fieldView.draw(this.field, this.gates);
         this.players.forEach(function (player) {
             this.playerView.draw(player);
         }, this);

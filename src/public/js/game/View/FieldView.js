@@ -9,11 +9,13 @@ define(["require", "exports", 'game/View/Color', 'game/View/View'], function (re
         function FieldView() {
             _super.apply(this, arguments);
         }
-        FieldView.prototype.draw = function (field) {
+        FieldView.prototype.draw = function (field, gates) {
+            var _this = this;
             this.fillRect(0, 0, field.width, field.height, Color.Grass);
             this.drawLine(field.width / 2, 0, field.width / 2, field.height, Color.White);
-            this.drawLine(0, (field.height - field.gateWidth) / 2, 0, (field.height + field.gateWidth) / 2, Color.Black);
-            this.drawLine(field.width, (field.height - field.gateWidth) / 2, field.width, (field.height + field.gateWidth) / 2, Color.Black);
+            gates.forEach(function (gate) {
+                _this.drawLine(gate.x, gate.y, gate.x, gate.y + gate.wide, Color.Black);
+            }, this);
             this.drawCircle(field.width / 2, field.height / 2, field.height / 8, Color.White);
         };
         return FieldView;
