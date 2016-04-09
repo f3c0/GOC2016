@@ -11,6 +11,7 @@ import Color            = require("./View/Color");
 import PlayerView       = require("./View/PlayerView");
 import BallView         = require("./View/BallView");
 import Gate = require("./Gate");
+import $ = require('jquery');
 
 class Game {
     private roundLength:number = 25;
@@ -43,7 +44,7 @@ class Game {
         ];
 
         this.ball = new Ball(new Coordinate(this.field.width / 2, this.field.height / 2), 20, this.field);
-        this.ball.speed = 40;
+        //this.ball.speed = 40;
 
         // At first always the second player is controlled by AI.
         this.inputProcessors = [
@@ -78,6 +79,9 @@ class Game {
         this.players[1].speed = 0;
         this.players[1].acceleration = 0;
         this.players[1].direction = Math.PI;
+
+        $('#score1').text(this.players[0].score);
+        $('#score2').text(this.players[1].score);
     }
 
     public start() {
@@ -148,10 +152,24 @@ class Game {
     private handleCollisionBallWall() {
         if (this.ball.top <= 0 || this.ball.bottom >= this.field.height) {
             this.ball.direction = 2 * Math.PI - this.ball.direction;
+
+            if (this.ball.top < 0) {
+                this.ball.coordinate.y = this.ball.r;
+            }
+            if (this.ball.bottom > this.field.height) {
+                this.ball.coordinate.y = this.field.height - this.ball.r;
+            }
         }
         if (this.ball.left <= 0 && (this.ball.coordinate.y <= this.gates[0].y || this.ball.coordinate.y >= this.gates[0].y + this.gates[0].wide)
             || this.ball.right >= this.field.width && (this.ball.coordinate.y <= this.gates[1].y || this.ball.coordinate.y >= this.gates[1].y + this.gates[1].wide)) {
             this.ball.direction = Math.PI - this.ball.direction;
+
+            if (this.ball.left < 0) {
+                this.ball.coordinate.x = this.ball.r;
+            }
+            if (this.ball.right > this.field.width) {
+                this.ball.coordinate.x = this.field.width - this.ball.r;
+            }
         }
     };
 }
