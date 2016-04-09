@@ -66,20 +66,20 @@ class Game {
 
         this.handleCollisions();
 
-        console.log('Chosen decision: ');
-        console.log(this.actuators[0].decision);
-        console.log('Player 1 position: ');
-        console.log(this.players[0].coordinate);
-        console.log('Player 1 speed: ');
-        console.log(this.players[0].speed);
-        console.log('Player 2 position: ');
-        console.log(this.players[1].coordinate);
-        console.log('Player 2 speed: ');
-        console.log(this.players[1].speed);
-        console.log('Ball position: ');
-        console.log(this.ball.coordinate);
-        console.log('Ball speed: ');
-        console.log(this.ball.speed);
+        //console.log('Chosen decision: ');
+        //console.log(this.actuators[0].decision);
+        //console.log('Player 1 position: ');
+        //console.log(this.players[0].coordinate);
+        //console.log('Player 1 speed: ');
+        //console.log(this.players[0].speed);
+        //console.log('Player 2 position: ');
+        //console.log(this.players[1].coordinate);
+        //console.log('Player 2 speed: ');
+        //console.log(this.players[1].speed);
+        //console.log('Ball position: ');
+        //console.log(this.ball.coordinate);
+        //console.log('Ball speed: ');
+        //console.log(this.ball.speed);
 
         this.draw();
 
@@ -98,6 +98,12 @@ class Game {
 
     private handleCollisions():void {
         this.handleCollisionBallWall();
+
+        this.players.forEach(function (player) {
+            if (Math.pow(player.r + this.ball.r, 2) >= Math.pow(player.coordinate.x - this.ball.coordinate.x, 2) + Math.pow(player.coordinate.y - this.ball.coordinate.y, 2)) {
+                this.ball.direction = Math.PI - this.ball.direction + Math.atan((player.coordinate.y - this.ball.coordinate.y) / (player.coordinate.x - this.ball.x)) + Math.PI / 2;
+            }
+        }, this);
     }
 
     private handleCollisionBallWall() {
